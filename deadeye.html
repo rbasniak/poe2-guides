@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- saved from url=(0046)https://rbasniak.github.io/poe2-guides/deadeye -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ice Shot Pathfinder POE 2 — Detailed Act-by-Act Guide</title>
     <style>
         :root {
@@ -532,6 +532,263 @@
             display: none !important;
         }
 
+        .resource-links {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .resource-link {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding: 16px 18px;
+            border-radius: 18px;
+            border: 1px solid var(--border);
+            background: rgba(0,0,0,.18);
+            color: inherit;
+            text-decoration: none;
+            transition: .16s ease;
+        }
+
+            .resource-link:hover {
+                transform: translateY(-2px);
+                border-color: rgba(251,191,36,.34);
+                background: rgba(251,191,36,.08);
+            }
+
+            .resource-link strong {
+                font-size: 15px;
+            }
+
+            .resource-link span {
+                color: var(--muted2);
+                font-size: 13px;
+                line-height: 1.45;
+            }
+
+        .rotation {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0,1fr));
+            gap: 10px;
+            counter-reset: step;
+        }
+
+        .step {
+            position: relative;
+            padding: 16px;
+            min-height: 130px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: rgba(255,255,255,.07);
+        }
+
+            .step::before {
+                counter-increment: step;
+                content: counter(step);
+                display: grid;
+                place-items: center;
+                width: 28px;
+                height: 28px;
+                border-radius: 10px;
+                background: linear-gradient(135deg, var(--lightning), var(--violet));
+                color: #1a1000;
+                font-weight: 950;
+                margin-bottom: 12px;
+            }
+
+            .step strong {
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            .step span {
+                color: var(--muted2);
+                font-size: 13px;
+            }
+
+
+        .tracker-toolbar {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .tracker-subtoolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .tracker-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            flex: 0 0 auto;
+        }
+
+        .tracker-btn {
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: rgba(0,0,0,.22);
+            color: var(--text);
+            font: inherit;
+            cursor: pointer;
+        }
+
+            .tracker-btn:hover {
+                background: rgba(255,255,255,.08);
+            }
+
+            .tracker-btn.danger {
+                border-color: rgba(251,113,133,.35);
+                color: #fecdd3;
+            }
+
+        .tracker-warning {
+            display: none;
+            margin: 0 0 16px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(251,191,36,.35);
+            background: rgba(251,191,36,.1);
+            color: #fde68a;
+            font-size: .92rem;
+        }
+
+            .tracker-warning.visible {
+                display: block;
+            }
+
+        .tracker-act-tabs,
+        .tracker-category-tabs {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+
+        .tracker-act-tab,
+        .tracker-category-tab {
+            flex: 0 0 auto;
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            background: rgba(0,0,0,.18);
+            color: var(--muted);
+            font: inherit;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+            .tracker-act-tab.active {
+                color: var(--text);
+                border-color: rgba(251,191,36,.45);
+                background: rgba(251,191,36,.12);
+            }
+
+            .tracker-category-tab.active {
+                color: var(--text);
+                border-color: rgba(96,165,250,.45);
+                background: rgba(96,165,250,.12);
+            }
+
+        .tracker-category {
+            margin-bottom: 0;
+        }
+
+        .tracker-category-head {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 16px;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+
+            .tracker-category-head h3 {
+                margin: 0;
+                font-size: 1.15rem;
+            }
+
+        .tracker-progress {
+            color: var(--muted);
+            font-size: .92rem;
+            font-family: var(--mono);
+        }
+
+        .tracker-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .tracker-group {
+            padding: 12px 14px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: rgba(0,0,0,.16);
+        }
+
+        .tracker-row {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+            .tracker-row input[type="checkbox"] {
+                width: 18px;
+                height: 18px;
+                margin-top: 2px;
+                flex: 0 0 auto;
+                accent-color: var(--ice);
+                cursor: pointer;
+            }
+
+        .tracker-label {
+            flex: 1;
+            min-width: 0;
+        }
+
+            .tracker-label strong {
+                display: block;
+                font-weight: 600;
+            }
+
+            .tracker-label .tracker-slot {
+                display: block;
+                margin-top: 2px;
+                color: var(--muted2);
+                font-size: .82rem;
+            }
+
+        .tracker-children {
+            margin: 10px 0 0 28px;
+            display: grid;
+            gap: 8px;
+        }
+
+            .tracker-children .tracker-row {
+                font-size: .94rem;
+            }
+
+        .tracker-group.is-complete > .tracker-row .tracker-label strong,
+        .tracker-group.is-complete > .tracker-children .tracker-label {
+            color: var(--muted2);
+            text-decoration: line-through;
+            text-decoration-color: rgba(174,187,210,.55);
+        }
+
+        .tracker-empty {
+            color: var(--muted2);
+            font-size: .94rem;
+            padding: 8px 0;
+        }
+
         .violet .section-kicker, .violet .timeline-title {
             color: var(--violet);
             border-color: rgba(167,139,250,.25);
@@ -653,6 +910,21 @@
             .route-grid {
                 grid-template-columns: .9fr 1.5fr;
             }
+
+            .tracker-row input[type="checkbox"] {
+                appearance: none;
+                width: auto;
+                height: auto;
+                margin: 0;
+            }
+
+            .tracker-row input[type="checkbox"]::after {
+                content: "[ ] ";
+            }
+
+            .tracker-row input[type="checkbox"]:checked::after {
+                content: "[x] ";
+            }
         }
     </style>
 </head>
@@ -666,12 +938,25 @@
                     <p>POE 2 route guide</p>
                 </div>
             </div>
-            <nav><a href="#overview">Overview</a><a href="#act1">Act 1</a><a href="#act2">Act 2</a><a href="#act3">Act 3</a><a href="#act4">Act 4</a><a href="#interlude">Interlude</a><a href="#mapping">Mapping</a><a href="#rotation">Boss Rotation</a><a href="#checklists">Checklists</a><a href="#timesaves">Time Saves</a></nav>
+                        <nav>
+                <a href="#overview">Overview</a>
+                <a href="#sources">Sources</a>
+                <a href="#act1">Act 1</a>
+                <a href="#act2">Act 2</a>
+                <a href="#act3">Act 3</a>
+                <a href="#act4">Act 4</a>
+                <a href="#interlude">Interlude</a>
+                <a href="#mapping">Mapping</a>
+                <a href="#rotation">Boss Rotation</a>
+                <a href="#build-tracker">Build Tracker</a>
+                <a href="#transition-checks">Transition Checks</a>
+                <a href="#timesaves">Time Saves</a>
+            </nav>
             <div class="side-note">
                 <strong>Timestamp rule:</strong><br>
                 Times use the VTT/video timeline. Spoken run timers are called out when they differ because of splices or pauses.
             </div>
-            <input class="searchbox" id="search" placeholder="Filter visible cards/timelines…" />
+            <input class="searchbox" id="search" placeholder="Filter cards, timelines, tracker…">
         </aside>
 
         <main>
@@ -687,13 +972,33 @@
                 </div>
             </header>
 
+            <section id="sources" class="section">
+                <div class="section-head">
+                    <div class="section-kicker">Links</div>
+                    <div>
+                        <h2>Build sources</h2>
+                        <p>Mobalytics planner for gear, gems, and passives while you follow the act guide.</p>
+                    </div>
+                </div>
+                <article class="card highlight">
+                    <h3>Reference links</h3>
+                    <div class="resource-links">
+                        <a class="resource-link" href="https://mobalytics.gg/poe-2/profile/bright-gun-0gguoz/builds/8520fdce-220e-4906-a6e5-3207c709cd8f" target="_blank" rel="noopener noreferrer">
+                            <strong>Mobalytics planner</strong>
+                            <span>Ice Shot Deadeye — equipment, skill gems, and passive priorities by act.</span>
+                        </a>
+                    </div>
+                </article>
+            </section>
+
+
             <section class="section">
                 <div class="overview-grid">
-                    <article class="card "><h3>Core route identity</h3><p>The run is not “Ice Shot from level 1.” It is a staged bow campaign route:</p><div class="pill-row"><span class="pill">Act 1 → early Act 2: Lightning Arrow + Lightning Rod</span><span class="pill">Act 2 bossing: Snipe + Frost Bomb</span><span class="pill">Act 3 onward: Ice Shot clear + Snipe bosses</span><span class="pill">Maps: Ice Shot clear, Snipe burst, Frost Bomb when usable</span></div></article>
+                    <article class="card"><h3>Core route identity</h3><p>The run is not “Ice Shot from level 1.” It is a staged bow campaign route:</p><div class="pill-row"><span class="pill">Act 1 → early Act 2: Lightning Arrow + Lightning Rod</span><span class="pill">Act 2 bossing: Snipe + Frost Bomb</span><span class="pill">Act 3 onward: Ice Shot clear + Snipe bosses</span><span class="pill">Maps: Ice Shot clear, Snipe burst, Frost Bomb when usable</span></div></article>
                     <article class="card highlight"><h3>What makes or breaks the time</h3><p>The build is strong, but the run depends on four recurring constraints: <strong>attribute planning</strong>, the <strong>chill-magnitude quiver</strong>, <strong>Frost Bomb staying usable</strong>, and avoiding excessive gear inspection.</p><div class="callout"><strong>Most important correction:</strong> do not copy the time losses. Copy the route, not every detour.</div></article>
                 </div>
                 <div class="two-col" style="margin-top:14px;">
-                    <article class="card "><h3>Skill progression summary</h3><table class="compact-table"><thead><tr><th>Stage</th><th>Clear</th><th>Bossing</th><th>Utility / notes</th></tr></thead><tbody><tr><td>Act 1</td><td><strong>Lightning Arrow</strong></td><td>Lightning Rod + Frost Bomb</td><td>Elemental Armament; rush rather than full-clear.</td></tr><tr><td>Early Act 2</td><td>Lightning Arrow</td><td><strong>Snipe begins replacing Lightning Rod</strong></td><td>Escape Shot, Barrage, Hourglass, Window of Opportunity.</td></tr><tr><td>Late Act 2</td><td>Lightning Arrow / transitional ice utility</td><td><strong>Snipe + Frost Bomb</strong></td><td>Freeze/chill timing becomes decisive.</td></tr><tr><td>Act 3</td><td><strong>Ice Shot</strong></td><td>Snipe + Frost Bomb</td><td>Ice Bite, mark, Escape Shot.</td></tr><tr><td>Act 4</td><td>Ice Shot</td><td>Snipe</td><td>Weapon-set passives for Dex/Int split.</td></tr><tr><td>Interlude</td><td>Ice Shot</td><td>Snipe</td><td>Wind Dancer or charge setup.</td></tr><tr><td>Maps</td><td>Ice Shot</td><td>Snipe + Frost Bomb when usable</td><td>Combat Frenzy/charge setup when functional.</td></tr></tbody></table></article>
+                    <article class="card"><h3>Skill progression summary</h3><table class="compact-table"><thead><tr><th>Stage</th><th>Clear</th><th>Bossing</th><th>Utility / notes</th></tr></thead><tbody><tr><td>Act 1</td><td><strong>Lightning Arrow</strong></td><td>Lightning Rod + Frost Bomb</td><td>Elemental Armament; rush rather than full-clear.</td></tr><tr><td>Early Act 2</td><td>Lightning Arrow</td><td><strong>Snipe begins replacing Lightning Rod</strong></td><td>Escape Shot, Barrage, Hourglass, Window of Opportunity.</td></tr><tr><td>Late Act 2</td><td>Lightning Arrow / transitional ice utility</td><td><strong>Snipe + Frost Bomb</strong></td><td>Freeze/chill timing becomes decisive.</td></tr><tr><td>Act 3</td><td><strong>Ice Shot</strong></td><td>Snipe + Frost Bomb</td><td>Ice Bite, mark, Escape Shot.</td></tr><tr><td>Act 4</td><td>Ice Shot</td><td>Snipe</td><td>Weapon-set passives for Dex/Int split.</td></tr><tr><td>Interlude</td><td>Ice Shot</td><td>Snipe</td><td>Wind Dancer or charge setup.</td></tr><tr><td>Maps</td><td>Ice Shot</td><td>Snipe + Frost Bomb when usable</td><td>Combat Frenzy/charge setup when functional.</td></tr></tbody></table></article>
                     <article class="card "><h3>Target / observed splits</h3><table class="compact-table"><thead><tr><th>Split</th><th>Target / observed</th></tr></thead><tbody><tr><td>Act 1 final</td><td>~00:50–00:55 video time; observed 00:53:10 / spoken ~52 min.</td></tr><tr><td>Act 2 final</td><td>~02:10–02:15; observed 02:13:52 / spoken ~2h13.</td></tr><tr><td>Ice Shot online</td><td>~02:15; observed 02:15:45 at level 31.</td></tr><tr><td>Act 3 final</td><td>~03:35–03:45; observed 03:36:43.</td></tr><tr><td>Act 4 final</td><td>~05:10; observed 05:14:12 / spoken ~5h09.</td></tr><tr><td>Campaign done</td><td>~06:15; observed 06:23:42 / spoken ~6h18.</td></tr><tr><td>Tier 15 boss killed</td><td>Observed 08:31:51 video time / spoken final ~9h43.</td></tr></tbody></table></article>
                 </div>
             </section>
@@ -715,54 +1020,54 @@
                             <thead><tr><th>Time</th><th>Lvl</th><th>Milestone</th></tr></thead>
                             <tbody>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">00:00:14</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">00:00:14</a></td>
                                     <td class="level-cell"><span class="level-chip">1</span></td>
                                     <td><strong>Run goal stated</strong><div class="tiny">Level 1 → Tier 15 Ice Shot Pathfinder.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">00:01:22</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">00:01:22</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Build progression explained</strong><div class="tiny">Lightning Arrow + Lightning Rod → Snipe → Ice Shot.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">00:02:30</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">00:02:30</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Lightning Rod taken</strong><div class="tiny">Sell junk and keep moving.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">00:02:45</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">00:02:45</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>First uncut gem</strong><div class="tiny">Pick the level 1 uncut gem from abandoned camp.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">00:03:15–00:03:50</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">00:03:15–00:03:50</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Frost Bomb acquired</strong><div class="tiny">Use it immediately on the first boss.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">00:05:26</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">00:05:26</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Elemental Armament</strong><div class="tiny">First important support for the early bow setup.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">00:08:28</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">00:08:28</a></td>
                                     <td class="level-cell"><span class="level-chip">5 target</span></td>
                                     <td><strong>Level 5 target</strong><div class="tiny">Kill only enough mobs to reach the breakpoint.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">00:10:00–00:13:00</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">00:10:00–00:13:00</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Bad bow detour</strong><div class="tiny">Run loses time trying to solve weapon RNG.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">00:53:10</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">00:53:10</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Act 1 final killed</strong><div class="tiny">Spoken timer around 52 minutes; slow but recoverable.</div></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="cards-stack"><article class="card "><h3>Primary objective</h3><p>Rush the early campaign without full-clearing. Your only real objectives are to unlock the early bow package, get Frost Bomb, reach the minimum level breakpoints, and avoid a catastrophic weapon start.</p></article><article class="card "><h3>Do this</h3><ul><li><strong>Start Lightning Arrow</strong> and pick <strong>Lightning Rod</strong> immediately when available.</li><li>Pick the <strong>level 1 uncut gem</strong> in the abandoned camp and take <strong>Frost Bomb</strong>.</li><li>Use Frost Bomb on early bosses: cast it, count roughly <strong>1–5</strong>, then recast as the window expires.</li><li>Take <strong>Elemental Armament</strong> as the first support power spike.</li><li>Kill only enough monsters to reach the next requirement; do not full-clear low-value zones.</li></ul></article><article class="card "><h3>Early gear priorities</h3><table class="compact-table"><thead><tr><th>Priority</th><th>What to look for</th></tr></thead><tbody><tr><td>1</td><td><strong>Any usable bow</strong>: short bow or flat elemental damage roll.</td></tr><tr><td>2</td><td><strong>Movement speed boots</strong>: ID boots early; MS saves minutes over the run.</td></tr><tr><td>3</td><td><strong>Transmute/Augment orbs</strong>: enough to make the bow usable.</td></tr><tr><td>4</td><td><strong>Flat fire/lightning/cold damage</strong>: any flat damage carries early.</td></tr><tr><td>5</td><td><strong>Basic quiver</strong>: damage or accuracy; the god-tier quiver comes later.</td></tr></tbody></table></article><article class="card warn"><h3>Failure point to avoid</h3><p>The transcript loses several minutes because no good bow drops. The correct play is not endless reset-fishing: buy or craft something mediocre-but-functional, then keep moving. Act 1 can still be recovered even if it ends around 52–55 minutes.</p></article></div>
+                    <div class="cards-stack"><article class="card"><h3>Primary objective</h3><p>Rush the early campaign without full-clearing. Your only real objectives are to unlock the early bow package, get Frost Bomb, reach the minimum level breakpoints, and avoid a catastrophic weapon start.</p></article><article class="card"><h3>Do this</h3><ul><li><strong>Start Lightning Arrow</strong> and pick <strong>Lightning Rod</strong> immediately when available.</li><li>Pick the <strong>level 1 uncut gem</strong> in the abandoned camp and take <strong>Frost Bomb</strong>.</li><li>Use Frost Bomb on early bosses: cast it, count roughly <strong>1–5</strong>, then recast as the window expires.</li><li>Take <strong>Elemental Armament</strong> as the first support power spike.</li><li>Kill only enough monsters to reach the next requirement; do not full-clear low-value zones.</li></ul></article><article class="card"><h3>Early gear priorities</h3><table class="compact-table"><thead><tr><th>Priority</th><th>What to look for</th></tr></thead><tbody><tr><td>1</td><td><strong>Any usable bow</strong>: short bow or flat elemental damage roll.</td></tr><tr><td>2</td><td><strong>Movement speed boots</strong>: ID boots early; MS saves minutes over the run.</td></tr><tr><td>3</td><td><strong>Transmute/Augment orbs</strong>: enough to make the bow usable.</td></tr><tr><td>4</td><td><strong>Flat fire/lightning/cold damage</strong>: any flat damage carries early.</td></tr><tr><td>5</td><td><strong>Basic quiver</strong>: damage or accuracy; the god-tier quiver comes later.</td></tr></tbody></table></article><article class="card warn"><h3>Failure point to avoid</h3><p>The transcript loses several minutes because no good bow drops. The correct play is not endless reset-fishing: buy or craft something mediocre-but-functional, then keep moving. Act 1 can still be recovered even if it ends around 52–55 minutes.</p></article></div>
                 </div>
             </section>
             <section id="act2" class="section route-section violet">
@@ -781,64 +1086,64 @@
                             <thead><tr><th>Time</th><th>Lvl</th><th>Milestone</th></tr></thead>
                             <tbody>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">00:54:51</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">00:54:51</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Act 2 shopping</strong><div class="tiny">Check for level 16 bow, rings, amulet, MS boots.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">01:01:44</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">01:01:44</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>31 Dex pressure</strong><div class="tiny">First clear attribute wall.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">01:09:56</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">01:09:56</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Balbala decision</strong><div class="tiny">Do it if you need power/spirit progression.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">01:11:00</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">01:11:00</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Balbala killed</strong><div class="tiny">Fight was smoother than expected.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">01:13:54</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">01:13:54</a></td>
                                     <td class="level-cell"><span class="level-chip">19</span></td>
                                     <td><strong>Level 19 reached</strong><div class="tiny">Take Escape Shot, Barrage, and Snipe pieces.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">01:17:57</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">01:17:57</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Snipe testing starts</strong><div class="tiny">Hourglass + Window of Opportunity.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">01:19:00</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">01:19:00</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Lightning Rod dropped</strong><div class="tiny">Snipe becomes the bossing engine.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">01:20:43</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">01:20:43</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Frost Bomb boss prep</strong><div class="tiny">Check stat requirements before Jamanra-type bosses.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">01:37:01</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">01:37:01</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Huge quiver spike</strong><div class="tiny">Chill-magnitude damage quiver/mod carries the run.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">01:45:50</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">01:45:50</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Ascendancy decision</strong><div class="tiny">Ascend after the quiver power spike.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">02:13:52</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">02:13:52</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Act 2 final killed</strong><div class="tiny">Spoken timer around 2h13.</div></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="cards-stack"><article class="card "><h3>Primary objective</h3><p>Transition from the Act 1 Lightning Arrow/Lightning Rod setup into <strong>Snipe bossing</strong>. Act 2 is where the build starts becoming powerful, but also where attribute pressure begins.</p></article><article class="card "><h3>Vendor check at Act 2 start</h3><table class="compact-table"><thead><tr><th>Slot</th><th>Desired stats</th></tr></thead><tbody><tr><td>Bow</td><td><strong>Level 16 bow</strong>, flat elemental damage, good phys/ele roll.</td></tr><tr><td>Amulet</td><td><strong>Dex / Int / Strength</strong>. This slot can save the run.</td></tr><tr><td>Rings</td><td>Resistances, flat damage, attributes.</td></tr><tr><td>Boots</td><td>15%+ movement speed, resist if possible.</td></tr><tr><td>Quiver</td><td>Damage, accuracy, or ideally chill-scaling later.</td></tr></tbody></table></article><article class="card "><h3>Skill transition</h3><ul><li>Keep clearing with <strong>Lightning Arrow</strong> until the Snipe package is available.</li><li>At level 19, take <strong>Escape Shot</strong>, <strong>Barrage</strong>, and the pieces needed for Snipe.</li><li>Test <strong>Snipe + Hourglass + Window of Opportunity</strong> on bosses.</li><li>Once Snipe starts deleting bosses, stop relying on Lightning Rod.</li></ul></article><article class="card "><h3>Bossing logic</h3><p>The Act 2 bossing package is about creating a freeze/chill damage window, then releasing a fully charged Snipe into that window. Failed one-shots in the run are usually caused by bad Frost Bomb timing, the boss moving/phasing, or releasing Snipe outside the damage window.</p></article><article class="card highlight"><h3>The quiver spike</h3><p>The chill-magnitude damage quiver/mod found around <strong>01:37:01</strong> is one of the biggest reasons the run succeeds. It makes chilled enemies take increased damage based on chill magnitude. Without that quiver or a comparable substitute, expect slower boss kills.</p></article><article class="card "><h3>Balbala and ascendancy</h3><p>Balbala is done even though Lightning Arrow feels awkward against moving bosses. After the quiver spike, the player chooses to ascend because the build has enough damage and control to make the trial safer.</p></article></div>
+                    <div class="cards-stack"><article class="card"><h3>Primary objective</h3><p>Transition from the Act 1 Lightning Arrow/Lightning Rod setup into <strong>Snipe bossing</strong>. Act 2 is where the build starts becoming powerful, but also where attribute pressure begins.</p></article><article class="card"><h3>Vendor check at Act 2 start</h3><table class="compact-table"><thead><tr><th>Slot</th><th>Desired stats</th></tr></thead><tbody><tr><td>Bow</td><td><strong>Level 16 bow</strong>, flat elemental damage, good phys/ele roll.</td></tr><tr><td>Amulet</td><td><strong>Dex / Int / Strength</strong>. This slot can save the run.</td></tr><tr><td>Rings</td><td>Resistances, flat damage, attributes.</td></tr><tr><td>Boots</td><td>15%+ movement speed, resist if possible.</td></tr><tr><td>Quiver</td><td>Damage, accuracy, or ideally chill-scaling later.</td></tr></tbody></table></article><article class="card"><h3>Skill transition</h3><ul><li>Keep clearing with <strong>Lightning Arrow</strong> until the Snipe package is available.</li><li>At level 19, take <strong>Escape Shot</strong>, <strong>Barrage</strong>, and the pieces needed for Snipe.</li><li>Test <strong>Snipe + Hourglass + Window of Opportunity</strong> on bosses.</li><li>Once Snipe starts deleting bosses, stop relying on Lightning Rod.</li></ul></article><article class="card"><h3>Bossing logic</h3><p>The Act 2 bossing package is about creating a freeze/chill damage window, then releasing a fully charged Snipe into that window. Failed one-shots in the run are usually caused by bad Frost Bomb timing, the boss moving/phasing, or releasing Snipe outside the damage window.</p></article><article class="card highlight"><h3>The quiver spike</h3><p>The chill-magnitude damage quiver/mod found around <strong>01:37:01</strong> is one of the biggest reasons the run succeeds. It makes chilled enemies take increased damage based on chill magnitude. Without that quiver or a comparable substitute, expect slower boss kills.</p></article><article class="card"><h3>Balbala and ascendancy</h3><p>Balbala is done even though Lightning Arrow feels awkward against moving bosses. After the quiver spike, the player chooses to ascend because the build has enough damage and control to make the trial safer.</p></article></div>
                 </div>
             </section>
             <section id="act3" class="section route-section blue">
@@ -857,49 +1162,49 @@
                             <thead><tr><th>Time</th><th>Lvl</th><th>Milestone</th></tr></thead>
                             <tbody>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">02:15:03</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">02:15:03</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Act 3 starts</strong><div class="tiny">Prepare for full Ice Shot conversion.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">02:15:45</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">02:15:45</a></td>
                                     <td class="level-cell"><span class="level-chip">31</span></td>
                                     <td><strong>Ice Shot online</strong><div class="tiny">Main campaign clear skill from now on.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">02:24:04</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">02:24:04</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Ice Shot + Snipe confirmed</strong><div class="tiny">Works even with level 16 bow if the rolls are right.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">02:25:08</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">02:25:08</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Ice Shot links shown</strong><div class="tiny">Ice Bite, Rapid Attack, Elemental Armament, Deliberation.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">02:26:00–02:36:00</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">02:26:00–02:36:00</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Herald of Ice detour</strong><div class="tiny">Good if natural; skip if it costs backtracking.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">03:27:41</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">03:27:41</a></td>
                                     <td class="level-cell"><span class="level-chip">41 target</span></td>
                                     <td><strong>Stat wall appears</strong><div class="tiny">Frost Bomb and Snipe upgrades strain Int/Dex.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">03:32:51</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">03:32:51</a></td>
                                     <td class="level-cell"><span class="level-chip">41</span></td>
                                     <td><strong>Level 41 confirmed</strong><div class="tiny">Upgrade Frost Bomb and Snipe to level 11, then fix attributes.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">03:36:43</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">03:36:43</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Act 3 final killed</strong><div class="tiny">Build is explicitly called stat-intensive.</div></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="cards-stack"><article class="card "><h3>Primary objective</h3><p>Convert into the real Ice Shot build. From level 31 onward, <strong>Ice Shot</strong> becomes the main clear skill while <strong>Snipe</strong> stays as the boss nuke.</p></article><article class="card "><h3>Ice Shot links</h3><table class="compact-table"><thead><tr><th>Skill</th><th>Supports / role</th></tr></thead><tbody><tr><td>Ice Shot</td><td><strong>Ice Bite</strong>: enables the pack-melting behavior once active.</td></tr><tr><td>Ice Shot</td><td><strong>Rapid Attack</strong>: smoother clearing.</td></tr><tr><td>Ice Shot</td><td><strong>Elemental Armament</strong>: generic elemental damage boost.</td></tr><tr><td>Ice Shot</td><td><strong>Deliberation</strong>: part of the shown setup.</td></tr><tr><td>Bossing</td><td><strong>Snipe + Frost Bomb + mark/freeze setup</strong>.</td></tr></tbody></table></article><article class="card warn"><h3>Herald of Ice rule</h3><p>Herald of Ice is useful, but the transcript spends time looking for the spirit gem and does not get clean value from the detour. Take it if it naturally appears; otherwise keep progressing. Ice Shot already clears well at this stage.</p></article><article class="card "><h3>Act 3 route goals</h3><ul><li>Take <strong>Ice Shot at level 31</strong>.</li><li>Keep Snipe for bosses; do not try to make Ice Shot do every boss job alone.</li><li>Grab easy value like the free rare belt, but avoid side detours after the objective is done.</li><li>Save correct gem levels for Frost Bomb; do not accidentally create a stat/level mismatch.</li><li>Prepare for the level 41 stat wall before the Act 3 final boss.</li></ul></article><article class="card danger"><h3>Level 41 stat wall</h3><p>Around level 41, the player upgrades Frost Bomb and Snipe to level 11, then temporarily breaks the setup because of missing Dex/Int. This is the first major “build knowledge” check: do not enter the boss arena with Snipe or Frost Bomb disabled.</p></article><article class="card "><h3>Pre-final checklist</h3><table class="compact-table"><thead><tr><th>Check</th><th>Required state</th></tr></thead><tbody><tr><td>Snipe</td><td>Usable. This is mandatory.</td></tr><tr><td>Frost Bomb</td><td>Usable if possible; major boss damage/exposure tool.</td></tr><tr><td>Ice Shot</td><td>Main clear skill.</td></tr><tr><td>Dex</td><td>Enough for bow/Snipe.</td></tr><tr><td>Int</td><td>Enough for Frost Bomb.</td></tr><tr><td>Strength</td><td>Enough for supports/utility if equipped.</td></tr><tr><td>Resists</td><td>Not perfect, but not awful.</td></tr></tbody></table></article></div>
+                    <div class="cards-stack"><article class="card"><h3>Primary objective</h3><p>Convert into the real Ice Shot build. From level 31 onward, <strong>Ice Shot</strong> becomes the main clear skill while <strong>Snipe</strong> stays as the boss nuke.</p></article><article class="card"><h3>Ice Shot links</h3><table class="compact-table"><thead><tr><th>Skill</th><th>Supports / role</th></tr></thead><tbody><tr><td>Ice Shot</td><td><strong>Ice Bite</strong>: enables the pack-melting behavior once active.</td></tr><tr><td>Ice Shot</td><td><strong>Rapid Attack</strong>: smoother clearing.</td></tr><tr><td>Ice Shot</td><td><strong>Elemental Armament</strong>: generic elemental damage boost.</td></tr><tr><td>Ice Shot</td><td><strong>Deliberation</strong>: part of the shown setup.</td></tr><tr><td>Bossing</td><td><strong>Snipe + Frost Bomb + mark/freeze setup</strong>.</td></tr></tbody></table></article><article class="card warn"><h3>Herald of Ice rule</h3><p>Herald of Ice is useful, but the transcript spends time looking for the spirit gem and does not get clean value from the detour. Take it if it naturally appears; otherwise keep progressing. Ice Shot already clears well at this stage.</p></article><article class="card"><h3>Act 3 route goals</h3><ul><li>Take <strong>Ice Shot at level 31</strong>.</li><li>Keep Snipe for bosses; do not try to make Ice Shot do every boss job alone.</li><li>Grab easy value like the free rare belt, but avoid side detours after the objective is done.</li><li>Save correct gem levels for Frost Bomb; do not accidentally create a stat/level mismatch.</li><li>Prepare for the level 41 stat wall before the Act 3 final boss.</li></ul></article><article class="card danger"><h3>Level 41 stat wall</h3><p>Around level 41, the player upgrades Frost Bomb and Snipe to level 11, then temporarily breaks the setup because of missing Dex/Int. This is the first major “build knowledge” check: do not enter the boss arena with Snipe or Frost Bomb disabled.</p></article><article class="card"><h3>Pre-final checklist</h3><table class="compact-table"><thead><tr><th>Check</th><th>Required state</th></tr></thead><tbody><tr><td>Snipe</td><td>Usable. This is mandatory.</td></tr><tr><td>Frost Bomb</td><td>Usable if possible; major boss damage/exposure tool.</td></tr><tr><td>Ice Shot</td><td>Main clear skill.</td></tr><tr><td>Dex</td><td>Enough for bow/Snipe.</td></tr><tr><td>Int</td><td>Enough for Frost Bomb.</td></tr><tr><td>Strength</td><td>Enough for supports/utility if equipped.</td></tr><tr><td>Resists</td><td>Not perfect, but not awful.</td></tr></tbody></table></article></div>
                 </div>
             </section>
             <section id="act4" class="section route-section amber">
@@ -918,34 +1223,34 @@
                             <thead><tr><th>Time</th><th>Lvl</th><th>Milestone</th></tr></thead>
                             <tbody>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">03:39:39</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">03:39:39</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Act 4 starts</strong><div class="tiny">Enter King’s March / Act 4.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">03:40:00–03:45:00</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">03:40:00–03:45:00</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Weapon-set passives fixed</strong><div class="tiny">Dex/bow on one set, Int/Frost Bomb on the other.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">04:18:30</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">04:18:30</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Major bow upgrade</strong><div class="tiny">Quality/craft a bow good enough for at least Tier 10 mapping.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">04:20:00–05:10:00</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">04:20:00–05:10:00</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Bosses become trivial</strong><div class="tiny">Several bosses are nearly or fully one-shot.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">05:14:12</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">05:14:12</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Act 4 final killed</strong><div class="tiny">Spoken timer around 5h09; too much gear checking.</div></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="cards-stack"><article class="card "><h3>Primary objective</h3><p>Stabilize the build and craft one strong bow that carries into early mapping. Act 4 is not mechanically complex for this build; the main danger is wasting time checking too much gear.</p></article><article class="card highlight"><h3>Weapon-set passive setup</h3><p>Set passives so weapon set 1 supports <strong>Dex / bow skills / Ice Shot / Snipe</strong>, while weapon set 2 supports <strong>Int / Frost Bomb</strong>. This prevents the build from breaking every time you upgrade gems.</p></article><article class="card "><h3>Gear rule for Act 4</h3><table class="compact-table"><thead><tr><th>Keep checking for</th><th>Ignore unless huge</th></tr></thead><tbody><tr><td>High flat elemental bow or good phys/ele base</td><td>Tiny bow upgrades</td></tr><tr><td>Movement speed boots with resist</td><td>Boots that lose movement speed</td></tr><tr><td>Resist + life rings</td><td>Damage rings that break resists</td></tr><tr><td>Attribute amulet</td><td>Amulet without stats when requirements are tight</td></tr><tr><td>Accuracy if missing attacks</td><td>Random rarity/loot luxury pieces</td></tr></tbody></table></article><article class="card "><h3>Major bow upgrade</h3><p>At around <strong>04:18:30</strong>, the creator quality/crafts a bow and says it can carry into at least <strong>Tier 10 mapping</strong>. This is the practical benchmark: once you have a bow in that range, stop shopping every vendor for marginal replacements.</p></article><article class="card "><h3>Act 4 gameplay</h3><ul><li>Ice Shot clears packs and keeps the run fast.</li><li>Snipe remains the boss burst skill.</li><li>Use Frost Bomb only when it is actually usable and worth the setup time.</li><li>Fix fire/cold/lightning resistance as you go; do not enter mapping with completely broken defenses.</li></ul></article><article class="card warn"><h3>Time loss note</h3><p>Act 4 ends around video timestamp <strong>05:14:12</strong>, with spoken timer around <strong>5h09</strong>. The creator explicitly notes that too much time was spent looking at equipment. A cleaner run saves time here.</p></article></div>
+                    <div class="cards-stack"><article class="card"><h3>Primary objective</h3><p>Stabilize the build and craft one strong bow that carries into early mapping. Act 4 is not mechanically complex for this build; the main danger is wasting time checking too much gear.</p></article><article class="card highlight"><h3>Weapon-set passive setup</h3><p>Set passives so weapon set 1 supports <strong>Dex / bow skills / Ice Shot / Snipe</strong>, while weapon set 2 supports <strong>Int / Frost Bomb</strong>. This prevents the build from breaking every time you upgrade gems.</p></article><article class="card"><h3>Gear rule for Act 4</h3><table class="compact-table"><thead><tr><th>Keep checking for</th><th>Ignore unless huge</th></tr></thead><tbody><tr><td>High flat elemental bow or good phys/ele base</td><td>Tiny bow upgrades</td></tr><tr><td>Movement speed boots with resist</td><td>Boots that lose movement speed</td></tr><tr><td>Resist + life rings</td><td>Damage rings that break resists</td></tr><tr><td>Attribute amulet</td><td>Amulet without stats when requirements are tight</td></tr><tr><td>Accuracy if missing attacks</td><td>Random rarity/loot luxury pieces</td></tr></tbody></table></article><article class="card"><h3>Major bow upgrade</h3><p>At around <strong>04:18:30</strong>, the creator quality/crafts a bow and says it can carry into at least <strong>Tier 10 mapping</strong>. This is the practical benchmark: once you have a bow in that range, stop shopping every vendor for marginal replacements.</p></article><article class="card"><h3>Act 4 gameplay</h3><ul><li>Ice Shot clears packs and keeps the run fast.</li><li>Snipe remains the boss burst skill.</li><li>Use Frost Bomb only when it is actually usable and worth the setup time.</li><li>Fix fire/cold/lightning resistance as you go; do not enter mapping with completely broken defenses.</li></ul></article><article class="card warn"><h3>Time loss note</h3><p>Act 4 ends around video timestamp <strong>05:14:12</strong>, with spoken timer around <strong>5h09</strong>. The creator explicitly notes that too much time was spent looking at equipment. A cleaner run saves time here.</p></article></div>
                 </div>
             </section>
             <section id="interlude" class="section route-section green">
@@ -964,34 +1269,34 @@
                             <thead><tr><th>Time</th><th>Lvl</th><th>Milestone</th></tr></thead>
                             <tbody>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">05:16:42</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">05:16:42</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Interlude starts</strong><div class="tiny">Plan Combat Frenzy + charge setup.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">05:27:30</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">05:27:30</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Wind Dancer chosen</strong><div class="tiny">Fallback because charge setup is not fully ready.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">05:42:17</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">05:42:17</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Level 64 noted as future requirement</strong><div class="tiny">Planning anchor, not current level at this moment.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">06:00:00–06:20:00</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">06:00:00–06:20:00</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Late campaign cleanup</strong><div class="tiny">Fix resists, upgrade gems, avoid unnecessary shopping.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">06:23:42</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">06:23:42</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Campaign completed</strong><div class="tiny">Spoken timer around 6h18.</div></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="cards-stack"><article class="card "><h3>Primary objective</h3><p>Treat Interlude as its own act: finish campaign cleanup, transition into the charge/defense package, and prepare for mapping without stalling for perfect gems.</p></article><article class="card "><h3>Charge setup plan</h3><table class="compact-table"><thead><tr><th>Option</th><th>Use when</th></tr></thead><tbody><tr><td>Combat Frenzy</td><td>Use when charge generation is available and stable.</td></tr><tr><td>Charge Profusion / Charge Infusion</td><td>Use when gem requirements allow and it improves damage/flow.</td></tr><tr><td>Charge Regulation</td><td>Do not force it if the gem level/setup is not ready.</td></tr><tr><td>Wind Dancer</td><td>Use as the practical fallback when the charge package is blocked.</td></tr></tbody></table></article><article class="card highlight"><h3>Correct decision pattern</h3><p>The run does not wait for the perfect charge configuration. It uses <strong>Wind Dancer</strong> when the charge setup is not ready. That is the right mindset for a timed run: use the best functional setup now, not the theoretically best setup later.</p></article><article class="card "><h3>Campaign finish prep</h3><ul><li>Fix resistances before mapping.</li><li>Upgrade Ice Shot and Snipe when requirements allow.</li><li>Keep Frost Bomb aligned with character level and Int requirements.</li><li>Avoid long vendor loops; only stop for clear upgrades.</li><li>Enter maps with enough waystone momentum and a bow that can carry early tiers.</li></ul></article><article class="card "><h3>Campaign completion</h3><p>The campaign completes at video timestamp <strong>06:23:42</strong>. The spoken timer is around <strong>6h18</strong>. The creator says this could be cleaner with less looting and gear inspection.</p></article></div>
+                    <div class="cards-stack"><article class="card"><h3>Primary objective</h3><p>Treat Interlude as its own act: finish campaign cleanup, transition into the charge/defense package, and prepare for mapping without stalling for perfect gems.</p></article><article class="card"><h3>Charge setup plan</h3><table class="compact-table"><thead><tr><th>Option</th><th>Use when</th></tr></thead><tbody><tr><td>Combat Frenzy</td><td>Use when charge generation is available and stable.</td></tr><tr><td>Charge Profusion / Charge Infusion</td><td>Use when gem requirements allow and it improves damage/flow.</td></tr><tr><td>Charge Regulation</td><td>Do not force it if the gem level/setup is not ready.</td></tr><tr><td>Wind Dancer</td><td>Use as the practical fallback when the charge package is blocked.</td></tr></tbody></table></article><article class="card highlight"><h3>Correct decision pattern</h3><p>The run does not wait for the perfect charge configuration. It uses <strong>Wind Dancer</strong> when the charge setup is not ready. That is the right mindset for a timed run: use the best functional setup now, not the theoretically best setup later.</p></article><article class="card"><h3>Campaign finish prep</h3><ul><li>Fix resistances before mapping.</li><li>Upgrade Ice Shot and Snipe when requirements allow.</li><li>Keep Frost Bomb aligned with character level and Int requirements.</li><li>Avoid long vendor loops; only stop for clear upgrades.</li><li>Enter maps with enough waystone momentum and a bow that can carry early tiers.</li></ul></article><article class="card"><h3>Campaign completion</h3><p>The campaign completes at video timestamp <strong>06:23:42</strong>. The spoken timer is around <strong>6h18</strong>. The creator says this could be cleaner with less looting and gear inspection.</p></article></div>
                 </div>
             </section>
             <section id="mapping" class="section route-section red">
@@ -1010,59 +1315,59 @@
                             <thead><tr><th>Time</th><th>Lvl</th><th>Milestone</th></tr></thead>
                             <tbody>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">06:27:00</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">06:27:00</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Mapping starts</strong><div class="tiny">Waystone progression begins.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">06:46:54</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">06:46:54</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Jumped too high</strong><div class="tiny">Needs lower-tier gems; damage alone is not the issue.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">06:54:59</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">06:54:59</a></td>
                                     <td class="level-cell"><span class="level-chip">64 target</span></td>
                                     <td><strong>Frost Bomb breakpoint</strong><div class="tiny">Push level so Frost Bomb becomes usable again.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">07:05:30</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">07:05:30</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Yellow maps viable</strong><div class="tiny">Comfortable after resists are fixed.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">07:43:30</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">07:43:30</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Tier 9 maps</strong><div class="tiny">Mapping progression anchor.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">08:13:17</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">08:13:17</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Tier 14 / area-level issue</strong><div class="tiny">Frost Bomb usefulness drops again.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">08:25:23</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">08:25:23</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Tier 15 acquired</strong><div class="tiny">Prepare safe first completion.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">08:27:03</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">08:27:03</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Blue T15 started</strong><div class="tiny">No terrible mods; correct choice.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">08:31:51</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">08:31:51</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>T15 boss killed</strong><div class="tiny">Final gameplay milestone.</div></td>
                                 </tr>
                                 <tr>
-                                    <td class="time-cell"><a href="#" title="Video timestamp">08:32:33</a></td>
+                                    <td class="time-cell"><a href="https://rbasniak.github.io/poe2-guides/deadeye#" title="Video timestamp">08:32:33</a></td>
                                     <td class="level-cell"></td>
                                     <td><strong>Final spoken timer</strong><div class="tiny">Creator states about 9h43 total; VTT/video time around 8h32.</div></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="cards-stack"><article class="card "><h3>Primary objective</h3><p>Push from first maps to a safe Tier 15 completion. The bottleneck shifts from raw damage to <strong>gem level, character level, waystone sustain, resistances, accuracy, and safe map selection</strong>.</p></article><article class="card warn"><h3>Early mapping rule</h3><p>Do not jump tiers faster than your gems and character level can support. Around <strong>06:46:54</strong>, the creator realizes he has pushed too high and needs lower-tier gems. If Frost Bomb or Snipe requirements break, farm lower maps instead of brute-forcing.</p></article><article class="card "><h3>Mapping priorities</h3><table class="compact-table"><thead><tr><th>Priority</th><th>Reason</th></tr></thead><tbody><tr><td>Character level / gem level</td><td>Frost Bomb and other skills repeatedly become unusable or ineffective.</td></tr><tr><td>Waystone sustain</td><td>You need enough map pool to continue pushing tiers.</td></tr><tr><td>Resistances</td><td>Yellow/red maps punish bad resists quickly.</td></tr><tr><td>Accuracy</td><td>Missing Snipe/Ice Shot wastes boss windows.</td></tr><tr><td>Safe modifiers</td><td>First T15 should be completion-focused, not ego-focused.</td></tr></tbody></table></article><article class="card "><h3>Tier pushing plan</h3><ul><li><strong>T1–T4:</strong> build waystone pool and patch gems.</li><li><strong>Level 64 target:</strong> make Frost Bomb functional again if possible.</li><li><strong>Yellow maps:</strong> fix resists before pushing dangerous mods.</li><li><strong>T9:</strong> continue sustain; do not force bad bosses.</li><li><strong>T14:</strong> area-level problems can make Frost Bomb weak/useless again.</li><li><strong>T15:</strong> run a safe blue map first and avoid bad modifiers.</li></ul></article><article class="card danger"><h3>Mods to avoid for first T15</h3><ul><li>Dual bosses or boss modifiers that make the Snipe window unreliable.</li><li>Heavy elemental resistance mods when your damage depends on chill/freeze scaling.</li><li>Dangerous extra damage combinations.</li><li>Bad layouts if you have alternatives.</li><li>Anything that makes the first clear risky when a blue T15 is available.</li></ul></article><article class="card highlight"><h3>Final result</h3><p>At <strong>08:31:51</strong> video time, the T15 boss dies. At <strong>08:32:33</strong>, the creator states the final spoken timer as about <strong>9h43</strong>. Use VTT/video timestamps for navigation and the spoken timer for run-comparison context.</p></article></div>
+                    <div class="cards-stack"><article class="card"><h3>Primary objective</h3><p>Push from first maps to a safe Tier 15 completion. The bottleneck shifts from raw damage to <strong>gem level, character level, waystone sustain, resistances, accuracy, and safe map selection</strong>.</p></article><article class="card warn"><h3>Early mapping rule</h3><p>Do not jump tiers faster than your gems and character level can support. Around <strong>06:46:54</strong>, the creator realizes he has pushed too high and needs lower-tier gems. If Frost Bomb or Snipe requirements break, farm lower maps instead of brute-forcing.</p></article><article class="card"><h3>Mapping priorities</h3><table class="compact-table"><thead><tr><th>Priority</th><th>Reason</th></tr></thead><tbody><tr><td>Character level / gem level</td><td>Frost Bomb and other skills repeatedly become unusable or ineffective.</td></tr><tr><td>Waystone sustain</td><td>You need enough map pool to continue pushing tiers.</td></tr><tr><td>Resistances</td><td>Yellow/red maps punish bad resists quickly.</td></tr><tr><td>Accuracy</td><td>Missing Snipe/Ice Shot wastes boss windows.</td></tr><tr><td>Safe modifiers</td><td>First T15 should be completion-focused, not ego-focused.</td></tr></tbody></table></article><article class="card"><h3>Tier pushing plan</h3><ul><li><strong>T1–T4:</strong> build waystone pool and patch gems.</li><li><strong>Level 64 target:</strong> make Frost Bomb functional again if possible.</li><li><strong>Yellow maps:</strong> fix resists before pushing dangerous mods.</li><li><strong>T9:</strong> continue sustain; do not force bad bosses.</li><li><strong>T14:</strong> area-level problems can make Frost Bomb weak/useless again.</li><li><strong>T15:</strong> run a safe blue map first and avoid bad modifiers.</li></ul></article><article class="card danger"><h3>Mods to avoid for first T15</h3><ul><li>Dual bosses or boss modifiers that make the Snipe window unreliable.</li><li>Heavy elemental resistance mods when your damage depends on chill/freeze scaling.</li><li>Dangerous extra damage combinations.</li><li>Bad layouts if you have alternatives.</li><li>Anything that makes the first clear risky when a blue T15 is available.</li></ul></article><article class="card highlight"><h3>Final result</h3><p>At <strong>08:31:51</strong> video time, the T15 boss dies. At <strong>08:32:33</strong>, the creator states the final spoken timer as about <strong>9h43</strong>. Use VTT/video timestamps for navigation and the spoken timer for run-comparison context.</p></article></div>
                 </div>
             </section>
 
@@ -1082,10 +1387,38 @@
                 </div>
             </section>
 
-            <section id="checklists" class="section">
+            <section id="build-tracker" class="section">
+                <div class="section-head">
+                    <div class="section-kicker">Tracker</div>
+                    <div>
+                        <h2>Build tracker</h2>
+                        <p>Mobalytics gear, gems, and passives per act. Pick an act, then switch tabs. Progress saves in this browser only.</p>
+                    </div>
+                </div>
+
+                <div class="tracker-warning" id="tracker-storage-warning" role="status">
+                    Could not save progress (browser storage full or blocked). Your checks still work until you reload.
+                </div>
+
+                <div class="tracker-toolbar">
+                    <div class="tracker-act-tabs" id="tracker-act-tabs" role="tablist" aria-label="Build tracker acts"></div>
+                    <div class="tracker-subtoolbar">
+                        <div class="tracker-category-tabs" id="tracker-category-tabs" role="tablist" aria-label="Build tracker categories"></div>
+                        <div class="tracker-actions">
+                            <button type="button" class="tracker-btn" id="tracker-reset-act">Reset current act</button>
+                            <button type="button" class="tracker-btn danger" id="tracker-reset-all">Reset all acts</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tracker-categories"></div>
+            </section>
+
+
+            <section id="transition-checks" class="section">
                 <div class="section-head">
                     <div class="section-kicker">Checks</div>
-                    <div><h2>Practical checklists</h2><p>Use these before major transitions so the build does not break at the next boss or tier jump.</p></div>
+                    <div><h2>Transition checks</h2><p>Use these before major transitions so the build does not break at the next boss or tier jump.</p></div>
                 </div>
                 <div class="two-col">
                     <article class="card danger"><h3>Before Act 3 final</h3><table class="compact-table"><thead><tr><th>Check</th><th>Required state</th></tr></thead><tbody><tr><td>Snipe</td><td>Usable; do not enter with it disabled.</td></tr><tr><td>Frost Bomb</td><td>Usable if possible; check Int and gem level.</td></tr><tr><td>Ice Shot</td><td>Main clear skill online.</td></tr><tr><td>Dex / Int / Str</td><td>Solved through amulet, rings, and weapon-set passives.</td></tr><tr><td>Resists</td><td>Not perfect, but not awful.</td></tr></tbody></table></article>
@@ -1107,13 +1440,475 @@
         </main>
     </div>
 
+    <script id="build-tracker-data" type="application/json">{"sourceUrl":"https://mobalytics.gg/poe-2/profile/bright-gun-0gguoz/builds/8520fdce-220e-4906-a6e5-3207c709cd8f","buildName":"Ice Shot Deadeye","author":"bright-gun-0gguoz","slug":"8520fdce-220e-4906-a6e5-3207c709cd8f","acts":[{"act":"Act 1","variantId":"default-variant","equipment":[{"name":"Obliterator Bow","slot":"mainHand","slug":"weapon-fourbow9endgame","modifiers":["Adds 24 to 42 Physical Damage","Adds 53 to 80 Cold Damage","154% increased Physical Damage","+3 to Level of all Projectile Skills"]},{"name":"Volant Quiver","slot":"offHand","slug":"quiver-fourquiver10","modifiers":["Adds 20 to 31 Cold damage to Attacks","+1 to Level of all Projectile Skills","16% increased Attack Speed","46% increased Projectile Speed","50% increased Damage with Bow Skills"]},{"name":"Prismatic Ring","slot":"leftRing","slug":"ring-fourring9","modifiers":["+149 to maximum Life","Adds 15 to 26 Physical Damage to Attacks","Adds 20 to 31 Cold damage to Attacks"]},{"name":"Prismatic Ring","slot":"rightRing","slug":"ring-fourring9","modifiers":["+149 to maximum Life","Adds 15 to 26 Physical Damage to Attacks","Adds 20 to 31 Cold damage to Attacks"]},{"name":"Stellar Amulet","slot":"amulet","slug":"amulet-fouramulet8","modifiers":["+3 to Level of all Projectile Skills","+33 to Spirit"]},{"name":"Corsair Coat","slot":"body","slug":"armour-fourbodydex10endgame","modifiers":["+330 to Evasion Rating","152% increased Evasion Rating","Gain Deflection Rating equal to 23% of Evasion Rating"]},{"name":"Grand Bracers","slot":"gloves","slug":"armour-fourglovesdex4endgame","modifiers":["+149 to maximum Life","Adds 11 to 20 Physical Damage to Attacks","Adds 15 to 24 Cold damage to Attacks","16% increased Attack Speed"]},{"name":"Desert Cap","slot":"helmet","slug":"armour-fourhelmetdex4endgame","modifiers":["+149 to maximum Life","22% increased Rarity of Items found"]},{"name":"Rawhide Belt","slot":"belt","slug":"armour-fourbelt1","modifiers":["+33 to Strength","+174 to maximum Life"]},{"name":"Cavalry Boots","slot":"boots","slug":"armour-fourbootsdex4endgame","modifiers":["+149 to maximum Life","35% increased Movement Speed","Gain Deflection Rating equal to 23% of Evasion Rating"]}],"skillGems":[{"name":"Ice Shot","slug":"iceshotplayer","supports":["Elemental Armament II","Ice Bite II","Rapid Attacks II","Fork"]},{"name":"Snipe","slug":"snipeplayer","supports":["Elemental Armament II","Concentrated Area","Elemental Focus","Window of Opportunity II","Close Combat II"]},{"name":"Tornado Shot","slug":"tornadoshotplayer","supports":["Prolonged Duration II","Overabundance II","Durability"]},{"name":"Ice-Tipped Arrows","slug":"icetippedarrowsplayer","supports":["Magnified Area II","Elemental Armament II","Short Fuse I","Longshot II"]},{"name":"Freezing Mark","slug":"freezingmarkplayer","supports":["Mark of Siphoning II","Charged Mark","Eternal Mark","Eternal Mark"]},{"name":"Barrage","slug":"barrageplayer","supports":["Cooldown Recovery II","Perpetual Charge","Rapid Casting II"]},{"name":"Herald of Ice","slug":"heraldoficeplayer","supports":["Magnified Area II","Elemental Armament II","Longshot II","Cold Attunement"]},{"name":"Combat Frenzy","slug":"combatfrenzyplayer","supports":["Charge Profusion II"]},{"name":"Mirage Archer","slug":"metamiragearcherplayer","supports":["Ice Shot","Elemental Armament II","Deliberation","Rapid Attacks II"]},{"name":"Mirage Deadeye","slug":"metamiragedeadeyeplayer","supports":["Ice Shot","Elemental Armament II","Deliberation","Rapid Attacks II"]}],"passiveTree":[{"name":"Honed Instincts","slug":"node-28992","tree":"main"},{"name":"Clean Shot","slug":"node-42781","tree":"main"},{"name":"Harness the Elements","slug":"node-12611","tree":"main"},{"name":"Agile Succession","slug":"node-56493","tree":"main"},{"name":"Essence of the Mountain","slug":"node-32683","tree":"main"},{"name":"Step Like Mist","slug":"node-48198","tree":"main"},{"name":"Mindful Awareness","slug":"node-62984","tree":"main"},{"name":"Flow Like Water","slug":"node-49220","tree":"main"},{"name":"Flow State","slug":"node-34233","tree":"main"},{"name":"Escape Velocity","slug":"node-17854","tree":"main"},{"name":"Catalysis","slug":"node-31433","tree":"main"},{"name":"The Wild Cat","slug":"node-22811","tree":"main"},{"name":"Acceleration","slug":"node-43082","tree":"main"},{"name":"Beastial Skin","slug":"node-59720","tree":"main"},{"name":"Enhanced Reflexes","slug":"node-51707","tree":"main"},{"name":"Deep Freeze","slug":"node-16142","tree":"main"},{"name":"Concussive Attack","slug":"node-36931","tree":"main"},{"name":"Blinding Strike","slug":"node-20916","tree":"main"},{"name":"Snowpiercer","slug":"node-9421","tree":"main"},{"name":"Maiming Strike","slug":"node-41580","tree":"main"},{"name":"Coming Calamity","slug":"node-28044","tree":"main"},{"name":"Quick Fingers","slug":"node-33542","tree":"main"},{"name":"Marked for Sickness","slug":"node-63830","tree":"main"},{"name":"Marked Agility","slug":"node-44756","tree":"main"},{"name":"Frazzled","slug":"node-32301","tree":"main"},{"name":"Hail","slug":"node-44974","tree":"main"},{"name":"The Noble Wolf","slug":"node-2745","tree":"main"},{"name":"Primal Sundering","slug":"node-50884","tree":"main"}]},{"act":"Act 2","variantId":"1","equipment":[{"name":"Obliterator Bow","slot":"mainHand","slug":"weapon-fourbow9endgame","modifiers":["Adds 24 to 42 Physical Damage","Adds 53 to 80 Cold Damage","154% increased Physical Damage","+3 to Level of all Projectile Skills"]},{"name":"Volant Quiver","slot":"offHand","slug":"quiver-fourquiver10","modifiers":["Adds 20 to 31 Cold damage to Attacks","+1 to Level of all Projectile Skills","16% increased Attack Speed","46% increased Projectile Speed","50% increased Damage with Bow Skills"]},{"name":"Prismatic Ring","slot":"leftRing","slug":"ring-fourring9","modifiers":["+149 to maximum Life","Adds 15 to 26 Physical Damage to Attacks","Adds 20 to 31 Cold damage to Attacks"]},{"name":"Prismatic Ring","slot":"rightRing","slug":"ring-fourring9","modifiers":["+149 to maximum Life","Adds 15 to 26 Physical Damage to Attacks","Adds 20 to 31 Cold damage to Attacks"]},{"name":"Stellar Amulet","slot":"amulet","slug":"amulet-fouramulet8","modifiers":["+3 to Level of all Projectile Skills","+33 to Spirit"]},{"name":"Corsair Coat","slot":"body","slug":"armour-fourbodydex10endgame","modifiers":["+330 to Evasion Rating","152% increased Evasion Rating","Gain Deflection Rating equal to 23% of Evasion Rating"]},{"name":"Desert Cap","slot":"helmet","slug":"armour-fourhelmetdex4endgame","modifiers":["+149 to maximum Life","22% increased Rarity of Items found"]},{"name":"Grand Bracers","slot":"gloves","slug":"armour-fourglovesdex4endgame","modifiers":["+149 to maximum Life","Adds 11 to 20 Physical Damage to Attacks","Adds 15 to 24 Cold damage to Attacks","16% increased Attack Speed"]},{"name":"Rawhide Belt","slot":"belt","slug":"armour-fourbelt1","modifiers":["+33 to Strength","+174 to maximum Life"]},{"name":"Cavalry Boots","slot":"boots","slug":"armour-fourbootsdex4endgame","modifiers":["+149 to maximum Life","35% increased Movement Speed","Gain Deflection Rating equal to 23% of Evasion Rating"]}],"skillGems":[{"name":"Ice Shot","slug":"iceshotplayer","supports":["Elemental Armament II","Ice Bite II","Rapid Attacks II","Fork","Cold Attunement"]},{"name":"Snipe","slug":"snipeplayer","supports":["Elemental Armament II","Concentrated Area","Elemental Focus","Window of Opportunity II","Close Combat II"]},{"name":"Tornado Shot","slug":"tornadoshotplayer","supports":["Prolonged Duration II","Overabundance II","Durability","Blind II"]},{"name":"Ice-Tipped Arrows","slug":"icetippedarrowsplayer","supports":["Magnified Area II","Elemental Armament II","Short Fuse I","Longshot II"]},{"name":"Freezing Mark","slug":"freezingmarkplayer","supports":["Mark of Siphoning II","Charged Mark","Eternal Mark","Eternal Mark"]},{"name":"Barrage","slug":"barrageplayer","supports":["Cooldown Recovery II","Perpetual Charge","Rapid Casting II"]},{"name":"Herald of Ice","slug":"heraldoficeplayer","supports":["Magnified Area II","Elemental Armament II","Longshot II","Cold Attunement","Elemental Focus"]},{"name":"Combat Frenzy","slug":"combatfrenzyplayer","supports":["Charge Profusion II"]},{"name":"Mirage Archer","slug":"metamiragearcherplayer","supports":["Ice Shot","Elemental Armament II","Deliberation","Rapid Attacks II"]},{"name":"Mirage Deadeye","slug":"metamiragedeadeyeplayer","supports":["Ice Shot","Elemental Armament II","Rapid Attacks II","Deliberation","Cooldown Recovery II"]}],"passiveTree":[{"name":"Honed Instincts","slug":"node-28992","tree":"main"},{"name":"Clean Shot","slug":"node-42781","tree":"main"},{"name":"Harness the Elements","slug":"node-12611","tree":"main"},{"name":"Agile Succession","slug":"node-56493","tree":"main"},{"name":"Essence of the Mountain","slug":"node-32683","tree":"main"},{"name":"Step Like Mist","slug":"node-48198","tree":"main"},{"name":"Mindful Awareness","slug":"node-62984","tree":"main"},{"name":"Flow Like Water","slug":"node-49220","tree":"main"},{"name":"Flow State","slug":"node-34233","tree":"main"},{"name":"Escape Velocity","slug":"node-17854","tree":"main"},{"name":"Catalysis","slug":"node-31433","tree":"main"},{"name":"The Wild Cat","slug":"node-22811","tree":"main"},{"name":"Acceleration","slug":"node-43082","tree":"main"},{"name":"Trained Deflection","slug":"node-52180","tree":"main"},{"name":"Beastial Skin","slug":"node-59720","tree":"main"},{"name":"Enhanced Reflexes","slug":"node-51707","tree":"main"},{"name":"Deep Freeze","slug":"node-16142","tree":"main"},{"name":"Concussive Attack","slug":"node-36931","tree":"main"},{"name":"Blinding Strike","slug":"node-20916","tree":"main"},{"name":"Snowpiercer","slug":"node-9421","tree":"main"},{"name":"Maiming Strike","slug":"node-41580","tree":"main"},{"name":"Coming Calamity","slug":"node-28044","tree":"main"},{"name":"Quick Fingers","slug":"node-33542","tree":"main"},{"name":"Marked for Sickness","slug":"node-63830","tree":"main"},{"name":"Marked Agility","slug":"node-44756","tree":"main"},{"name":"Frazzled","slug":"node-32301","tree":"main"},{"name":"Vile Wounds","slug":"node-30695","tree":"main"},{"name":"Imbibed Power","slug":"node-50912","tree":"main"},{"name":"Disorientation","slug":"node-38459","tree":"main"},{"name":"Master Fletching","slug":"node-30341","tree":"main"},{"name":"Hail","slug":"node-44974","tree":"main"},{"name":"Primal Sundering","slug":"node-50884","tree":"main"},{"name":"The Noble Wolf","slug":"node-2745","tree":"main"}]},{"act":"Act 3","variantId":"2","equipment":[{"name":"Obliterator Bow","slot":"mainHand","slug":"weapon-fourbow9endgame","modifiers":["Adds 24 to 42 Physical Damage","Adds 53 to 80 Cold Damage","154% increased Physical Damage","+3 to Level of all Projectile Skills"]},{"name":"Volant Quiver","slot":"offHand","slug":"quiver-fourquiver10","modifiers":["Adds 20 to 31 Cold damage to Attacks","+1 to Level of all Projectile Skills","16% increased Attack Speed","46% increased Projectile Speed","50% increased Damage with Bow Skills"]},{"name":"Ancestral Tiara","slot":"helmet","slug":"armour-fourhelmetint8endgame","modifiers":["+10 to maximum Life","+60 to maximum Energy Shield","100% increased Energy Shield","13% increased Evasion and Energy Shield"]},{"name":"Prismatic Ring","slot":"leftRing","slug":"ring-fourring9","modifiers":["+149 to maximum Life","Adds 15 to 26 Physical Damage to Attacks","Adds 20 to 31 Cold damage to Attacks"]},{"name":"Prismatic Ring","slot":"rightRing","slug":"ring-fourring9","modifiers":["+149 to maximum Life","Adds 15 to 26 Physical Damage to Attacks","Adds 20 to 31 Cold damage to Attacks"]},{"name":"Stellar Amulet","slot":"amulet","slug":"amulet-fouramulet8","modifiers":["+3 to Level of all Projectile Skills","+33 to Spirit"]},{"name":"Corsair Coat","slot":"body","slug":"armour-fourbodydex10endgame","modifiers":["+330 to Evasion Rating","152% increased Evasion Rating","Gain Deflection Rating equal to 23% of Evasion Rating"]},{"name":"Grand Bracers","slot":"gloves","slug":"armour-fourglovesdex4endgame","modifiers":["+149 to maximum Life","Adds 11 to 20 Physical Damage to Attacks","Adds 15 to 24 Cold damage to Attacks","16% increased Attack Speed"]},{"name":"Rawhide Belt","slot":"belt","slug":"armour-fourbelt1","modifiers":["+33 to Strength","+174 to maximum Life"]},{"name":"Bladed Shoes","slot":"boots","slug":"armour-fourbootsdexint6","modifiers":["100% increased Evasion and Energy Shield","35% increased Movement Speed","Gain Deflection Rating equal to 23% of Evasion Rating"]}],"skillGems":[{"name":"Ice Shot","slug":"iceshotplayer","supports":["Elemental Armament II","Ice Bite II","Rapid Attacks II","Fork","Cold Attunement"]},{"name":"Snipe","slug":"snipeplayer","supports":["Elemental Armament II","Concentrated Area","Elemental Focus","Window of Opportunity II","Close Combat II"]},{"name":"Tornado Shot","slug":"tornadoshotplayer","supports":["Prolonged Duration II","Overabundance II","Durability","Blind II"]},{"name":"Ice-Tipped Arrows","slug":"icetippedarrowsplayer","supports":["Magnified Area II","Elemental Armament II","Short Fuse I","Longshot II"]},{"name":"Freezing Mark","slug":"freezingmarkplayer","supports":["Mark of Siphoning II","Charged Mark","Eternal Mark","Eternal Mark"]},{"name":"Barrage","slug":"barrageplayer","supports":["Cooldown Recovery II","Perpetual Charge","Rapid Casting II"]},{"name":"Herald of Ice","slug":"heraldoficeplayer","supports":["Magnified Area II","Elemental Armament II","Longshot II","Cold Attunement","Elemental Focus"]},{"name":"Ghost Dance","slug":"ghostdanceplayer","supports":["Cooldown Recovery II"]},{"name":"Mirage Archer","slug":"metamiragearcherplayer","supports":["Ice Shot","Elemental Armament II","Deliberation","Rapid Attacks II","Cooldown Recovery II"]},{"name":"Mirage Deadeye","slug":"metamiragedeadeyeplayer","supports":["Ice Shot","Elemental Armament II","Rapid Attacks II","Deliberation","Cooldown Recovery II"]}],"passiveTree":[{"name":"Honed Instincts","slug":"node-28992","tree":"main"},{"name":"Clean Shot","slug":"node-42781","tree":"main"},{"name":"Harness the Elements","slug":"node-12611","tree":"main"},{"name":"Agile Succession","slug":"node-56493","tree":"main"},{"name":"Essence of the Mountain","slug":"node-32683","tree":"main"},{"name":"Step Like Mist","slug":"node-48198","tree":"main"},{"name":"Mindful Awareness","slug":"node-62984","tree":"main"},{"name":"Flow Like Water","slug":"node-49220","tree":"main"},{"name":"Flow State","slug":"node-34233","tree":"main"},{"name":"Escape Velocity","slug":"node-17854","tree":"main"},{"name":"Catalysis","slug":"node-31433","tree":"main"},{"name":"The Wild Cat","slug":"node-22811","tree":"main"},{"name":"Acceleration","slug":"node-43082","tree":"main"},{"name":"Beastial Skin","slug":"node-59720","tree":"main"},{"name":"Deep Freeze","slug":"node-16142","tree":"main"},{"name":"Concussive Attack","slug":"node-36931","tree":"main"},{"name":"Blinding Strike","slug":"node-20916","tree":"main"},{"name":"Snowpiercer","slug":"node-9421","tree":"main"},{"name":"Maiming Strike","slug":"node-41580","tree":"main"},{"name":"Coming Calamity","slug":"node-28044","tree":"main"},{"name":"Quick Fingers","slug":"node-33542","tree":"main"},{"name":"Marked for Sickness","slug":"node-63830","tree":"main"},{"name":"Marked Agility","slug":"node-44756","tree":"main"},{"name":"Frazzled","slug":"node-32301","tree":"main"},{"name":"Imbibed Power","slug":"node-50912","tree":"main"},{"name":"Disorientation","slug":"node-38459","tree":"main"},{"name":"Master Fletching","slug":"node-30341","tree":"main"},{"name":"Hail","slug":"node-44974","tree":"main"},{"name":"Shimmering","slug":"node-53941","tree":"main"},{"name":"Immaterial","slug":"node-19156","tree":"main"},{"name":"Killer Instinct","slug":"node-56453","tree":"main"},{"name":"Subterfuge Mask","slug":"node-55193","tree":"main"},{"name":"Primal Sundering","slug":"node-50884","tree":"main"},{"name":"The Noble Wolf","slug":"node-2745","tree":"main"}]}]}</script>
+    <script>
+        (function initBuildTracker() {
+            const pageSlug = 'deadeye';
+            const storageKey = `poe2-guides:${pageSlug}:build-tracker:v1`;
+            const dataElement = document.getElementById('build-tracker-data');
+
+            if (!dataElement) {
+                return;
+            }
+
+            const buildData = JSON.parse(dataElement.textContent);
+            const categories = [
+                { key: 'equipment', label: 'Equipment', childPrefix: 'mod', childField: 'modifiers', showSlot: true },
+                { key: 'skillGems', label: 'Skill Gems', childPrefix: 'support', childField: 'supports', showSlot: false },
+                { key: 'passiveTree', label: 'Passive Tree', childPrefix: null, childField: null, showSlot: false }
+            ];
+
+            let activeAct = buildData.acts[0]?.act || 'Act 1';
+            let activeCategory = 'equipment';
+            let trackerState = loadTrackerState();
+            let saveTimer = null;
+
+            const actTabsRoot = document.getElementById('tracker-act-tabs');
+            const categoryTabsRoot = document.getElementById('tracker-category-tabs');
+            const categoriesRoot = document.getElementById('tracker-categories');
+            const resetActButton = document.getElementById('tracker-reset-act');
+            const resetAllButton = document.getElementById('tracker-reset-all');
+            const storageWarning = document.getElementById('tracker-storage-warning');
+
+            function normalizeId(value) {
+                return String(value)
+                    .toLowerCase()
+                    .replace(/[^a-z0-9]+/g, '-')
+                    .replace(/^-|-$/g, '');
+            }
+
+            function getItemId(item, index, categoryKey) {
+                const slugPart = item.slug ? normalizeId(item.slug) : normalizeId(item.name);
+                const slotPart = item.slot ? `--${normalizeId(item.slot)}` : '';
+
+                return `${categoryKey}--${slugPart}${slotPart}--${index}`;
+            }
+
+            function getChildId(prefix, index) {
+                return `${prefix}-${index}`;
+            }
+
+            function loadTrackerState() {
+                try {
+                    const raw = localStorage.getItem(storageKey);
+
+                    if (!raw) {
+                        return createEmptyState();
+                    }
+
+                    const parsed = JSON.parse(raw);
+
+                    return mergeWithActs(parsed);
+                }
+                catch {
+                    return createEmptyState();
+                }
+            }
+
+            function createEmptyState() {
+                const state = {
+                    equipment: {},
+                    skillGems: {},
+                    passiveTree: {}
+                };
+
+                for (const act of buildData.acts) {
+                    state.equipment[act.act] = {};
+                    state.skillGems[act.act] = {};
+                    state.passiveTree[act.act] = {};
+                }
+
+                return state;
+            }
+
+            function mergeWithActs(saved) {
+                const state = createEmptyState();
+
+                for (const category of categories) {
+                    for (const act of buildData.acts) {
+                        const actLabel = act.act;
+                        const savedAct = saved?.[category.key]?.[actLabel] || {};
+
+                        state[category.key][actLabel] = { ...savedAct };
+                    }
+                }
+
+                return state;
+            }
+
+            function saveTrackerState() {
+                clearTimeout(saveTimer);
+                saveTimer = setTimeout(() => {
+                    try {
+                        localStorage.setItem(storageKey, JSON.stringify(trackerState));
+                        storageWarning.classList.remove('visible');
+                    }
+                    catch {
+                        storageWarning.classList.add('visible');
+                    }
+                }, 80);
+            }
+
+            function ensureItemState(categoryKey, actLabel, itemId) {
+                if (!trackerState[categoryKey][actLabel][itemId]) {
+                    trackerState[categoryKey][actLabel][itemId] = {
+                        self: false,
+                        children: {}
+                    };
+                }
+
+                return trackerState[categoryKey][actLabel][itemId];
+            }
+
+            function getActItems(act, category) {
+                return act[category.key] || [];
+            }
+
+            function countProgress(actLabel, category) {
+                const act = buildData.acts.find(entry => entry.act === actLabel);
+
+                if (!act) {
+                    return { done: 0, total: 0 };
+                }
+
+                let done = 0;
+                let total = 0;
+
+                const items = getActItems(act, category);
+
+                for (let index = 0; index < items.length; index++) {
+                    const item = items[index];
+                    const itemId = getItemId(item, index, category.key);
+                    const children = category.childField ? (item[category.childField] || []) : [];
+                    const itemState = trackerState[category.key][actLabel][itemId] || { self: false, children: {} };
+
+                    total += 1 + children.length;
+
+                    if (itemState.self) {
+                        done += 1;
+                    }
+
+                    for (let childIndex = 0; childIndex < children.length; childIndex++) {
+                        const childId = getChildId(category.childPrefix, childIndex);
+
+                        if (itemState.children[childId]) {
+                            done += 1;
+                        }
+                    }
+                }
+
+                return { done, total };
+            }
+
+            function updateGroupVisual(groupElement, parentCheckbox, childCheckboxes) {
+                const checkedChildren = childCheckboxes.filter(checkbox => checkbox.checked).length;
+                const allChildrenChecked = childCheckboxes.length > 0 && checkedChildren === childCheckboxes.length;
+                const someChildrenChecked = checkedChildren > 0;
+                const parentChecked = parentCheckbox.checked;
+
+                parentCheckbox.indeterminate = someChildrenChecked && !allChildrenChecked;
+
+                if (childCheckboxes.length > 0) {
+                    if (!parentCheckbox.indeterminate) {
+                        parentCheckbox.checked = allChildrenChecked;
+                    }
+                }
+
+                const isComplete = parentCheckbox.checked && (childCheckboxes.length === 0 || allChildrenChecked);
+                groupElement.classList.toggle('is-complete', isComplete);
+            }
+
+            function renderActTabs() {
+                actTabsRoot.innerHTML = '';
+
+                for (const act of buildData.acts) {
+                    const button = document.createElement('button');
+                    const equipmentProgress = countProgress(act.act, categories[0]);
+                    const gemsProgress = countProgress(act.act, categories[1]);
+                    const passivesProgress = countProgress(act.act, categories[2]);
+                    const totalDone = equipmentProgress.done + gemsProgress.done + passivesProgress.done;
+                    const totalItems = equipmentProgress.total + gemsProgress.total + passivesProgress.total;
+                    const isActive = act.act === activeAct;
+
+                    button.type = 'button';
+                    button.className = `tracker-act-tab${isActive ? ' active' : ''}`;
+                    button.setAttribute('role', 'tab');
+                    button.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                    button.textContent = `${act.act} (${totalDone}/${totalItems})`;
+
+                    button.addEventListener('click', () => {
+                        activeAct = act.act;
+                        renderActTabs();
+                        renderCategoryTabs();
+                        renderActiveCategory();
+                    });
+
+                    actTabsRoot.appendChild(button);
+                }
+            }
+
+            function getCategoryAnchorId(categoryKey) {
+                if (categoryKey === 'skillGems') {
+                    return 'gems';
+                }
+
+                if (categoryKey === 'passiveTree') {
+                    return 'passives';
+                }
+
+                return 'equipment';
+            }
+
+            function renderCategoryTabs() {
+                categoryTabsRoot.innerHTML = '';
+
+                for (const category of categories) {
+                    const progress = countProgress(activeAct, category);
+                    const isActive = category.key === activeCategory;
+                    const button = document.createElement('button');
+
+                    button.type = 'button';
+                    button.className = `tracker-category-tab${isActive ? ' active' : ''}`;
+                    button.setAttribute('role', 'tab');
+                    button.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                    button.setAttribute('aria-controls', `build-tracker-${getCategoryAnchorId(category.key)}`);
+                    button.textContent = `${category.label} (${progress.done}/${progress.total})`;
+
+                    button.addEventListener('click', () => {
+                        activeCategory = category.key;
+                        renderCategoryTabs();
+                        renderActiveCategory();
+                    });
+
+                    categoryTabsRoot.appendChild(button);
+                }
+            }
+
+            function refreshTrackerTabs() {
+                renderActTabs();
+                renderCategoryTabs();
+            }
+
+            function renderActiveCategory() {
+                categoriesRoot.innerHTML = '';
+
+                const category = categories.find(entry => entry.key === activeCategory);
+
+                if (!category) {
+                    return;
+                }
+
+                const act = buildData.acts.find(entry => entry.act === activeAct);
+
+                if (!act) {
+                    return;
+                }
+
+                const progress = countProgress(activeAct, category);
+                const block = document.createElement('article');
+                block.className = 'card tracker-category tracker-panel';
+                block.id = `build-tracker-${getCategoryAnchorId(category.key)}`;
+                block.setAttribute('role', 'tabpanel');
+
+                const head = document.createElement('div');
+                head.className = 'tracker-category-head';
+                head.innerHTML = `<h3>${category.label}</h3><span class="tracker-progress">${progress.done}/${progress.total}</span>`;
+
+                const list = document.createElement('div');
+                list.className = 'tracker-list';
+
+                const items = getActItems(act, category);
+
+                if (items.length === 0) {
+                    const empty = document.createElement('p');
+                    empty.className = 'tracker-empty';
+                    empty.textContent = 'No items for this act.';
+                    list.appendChild(empty);
+                }
+
+                for (let index = 0; index < items.length; index++) {
+                        const item = items[index];
+                        const itemId = getItemId(item, index, category.key);
+                        const itemState = ensureItemState(category.key, activeAct, itemId);
+                        const children = category.childField ? (item[category.childField] || []) : [];
+                        const group = document.createElement('div');
+                        group.className = 'tracker-group tracker-panel';
+                        group.dataset.trackerItem = 'true';
+
+                        const parentRow = document.createElement('div');
+                        parentRow.className = 'tracker-row';
+
+                        const parentCheckbox = document.createElement('input');
+                        parentCheckbox.type = 'checkbox';
+                        parentCheckbox.checked = !!itemState.self;
+                        parentCheckbox.setAttribute('aria-label', item.name);
+
+                        const parentLabel = document.createElement('div');
+                        parentLabel.className = 'tracker-label';
+                        parentLabel.innerHTML = `<strong>${escapeHtml(item.name)}</strong>`;
+
+                        if (category.showSlot && item.slot) {
+                            parentLabel.innerHTML += `<span class="tracker-slot">${escapeHtml(item.slot)}</span>`;
+                        }
+
+                        parentRow.appendChild(parentCheckbox);
+                        parentRow.appendChild(parentLabel);
+                        group.appendChild(parentRow);
+
+                        const childCheckboxes = [];
+
+                        if (children.length > 0) {
+                            const childList = document.createElement('div');
+                            childList.className = 'tracker-children';
+
+                            for (let childIndex = 0; childIndex < children.length; childIndex++) {
+                                const childText = children[childIndex];
+                                const childId = getChildId(category.childPrefix, childIndex);
+                                const childRow = document.createElement('div');
+                                childRow.className = 'tracker-row';
+
+                                const childCheckbox = document.createElement('input');
+                                childCheckbox.type = 'checkbox';
+                                childCheckbox.checked = !!itemState.children[childId];
+                                childCheckbox.setAttribute('aria-label', childText);
+
+                                const childLabel = document.createElement('div');
+                                childLabel.className = 'tracker-label';
+                                childLabel.textContent = childText;
+
+                                childRow.appendChild(childCheckbox);
+                                childRow.appendChild(childLabel);
+                                childList.appendChild(childRow);
+                                childCheckboxes.push(childCheckbox);
+
+                                childCheckbox.addEventListener('change', () => {
+                                    itemState.children[childId] = childCheckbox.checked;
+
+                                    const allChecked = childCheckboxes.every(checkbox => checkbox.checked);
+                                    itemState.self = allChecked;
+                                    parentCheckbox.checked = allChecked;
+
+                                    updateGroupVisual(group, parentCheckbox, childCheckboxes);
+                                    saveTrackerState();
+                                    refreshTrackerTabs();
+                                    updateActiveCategoryProgress(head);
+                                });
+                            }
+
+                            group.appendChild(childList);
+                        }
+
+                        parentCheckbox.addEventListener('change', () => {
+                            const isChecked = parentCheckbox.checked;
+                            itemState.self = isChecked;
+
+                            for (const childCheckbox of childCheckboxes) {
+                                childCheckbox.checked = isChecked;
+                                const childId = childCheckbox.getAttribute('data-child-id');
+
+                                if (childId) {
+                                    itemState.children[childId] = isChecked;
+                                }
+                            }
+
+                            updateGroupVisual(group, parentCheckbox, childCheckboxes);
+                            saveTrackerState();
+                            refreshTrackerTabs();
+                            updateActiveCategoryProgress(head);
+                        });
+
+                        for (let childIndex = 0; childIndex < childCheckboxes.length; childIndex++) {
+                            childCheckboxes[childIndex].setAttribute('data-child-id', getChildId(category.childPrefix, childIndex));
+
+                            if (!itemState.children[getChildId(category.childPrefix, childIndex)]) {
+                                itemState.children[getChildId(category.childPrefix, childIndex)] = false;
+                            }
+                        }
+
+                        updateGroupVisual(group, parentCheckbox, childCheckboxes);
+                        list.appendChild(group);
+                }
+
+                block.appendChild(head);
+                block.appendChild(list);
+                categoriesRoot.appendChild(block);
+            }
+
+            function updateActiveCategoryProgress(headElement) {
+                const category = categories.find(entry => entry.key === activeCategory);
+
+                if (!category) {
+                    return;
+                }
+
+                const progress = countProgress(activeAct, category);
+                const progressElement = headElement.querySelector('.tracker-progress');
+
+                if (progressElement) {
+                    progressElement.textContent = `${progress.done}/${progress.total}`;
+                }
+            }
+
+            function escapeHtml(value) {
+                return String(value)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;');
+            }
+
+            function resetAct(actLabel) {
+                for (const category of categories) {
+                    trackerState[category.key][actLabel] = {};
+                }
+
+                saveTrackerState();
+                refreshTrackerTabs();
+                renderActiveCategory();
+            }
+
+            function resetAllActs() {
+                trackerState = createEmptyState();
+                saveTrackerState();
+                refreshTrackerTabs();
+                renderActiveCategory();
+            }
+
+            resetActButton.addEventListener('click', () => {
+                const confirmed = confirm(`Reset all checklist progress for ${activeAct}?`);
+
+                if (confirmed) {
+                    resetAct(activeAct);
+                }
+            });
+
+            resetAllButton.addEventListener('click', () => {
+                const confirmed = confirm('Reset build tracker progress for all acts?');
+
+                if (confirmed) {
+                    resetAllActs();
+                }
+            });
+
+            renderActTabs();
+            renderCategoryTabs();
+            renderActiveCategory();
+
+            window.buildTrackerRefresh = function() {
+                refreshTrackerTabs();
+                renderActiveCategory();
+            };
+        })();
+    </script>
     <script>
         const links = Array.from(document.querySelectorAll('nav a'));
         const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
         const onScroll = () => {
             let current = sections[0];
             for (const section of sections) {
-                if (section.getBoundingClientRect().top < 140) current = section;
+                if (section.getBoundingClientRect().top < 140) {
+                    current = section;
+                }
             }
             links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current.id));
         };
@@ -1121,7 +1916,7 @@
         onScroll();
 
         const search = document.getElementById('search');
-        const searchable = Array.from(document.querySelectorAll('.card, .timeline-panel'));
+        const searchable = Array.from(document.querySelectorAll('.card, .timeline-panel, .tracker-panel'));
         search.addEventListener('input', () => {
             const q = search.value.trim().toLowerCase();
             searchable.forEach(el => {
@@ -1129,5 +1924,5 @@
             });
         });
     </script>
-</body>
-</html>
+
+</body></html>
