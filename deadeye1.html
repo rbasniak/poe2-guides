@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ice Shot / Snipe Deadeye Campaign Path</title>
+<style>
+:root {
+  --bg: #0d1117;
+  --panel: #151b23;
+  --panel-2: #101720;
+  --text: #e6edf3;
+  --muted: #9fb0c3;
+  --accent: #7cc7ff;
+  --accent-2: #9ef0c0;
+  --warn: #ffd166;
+  --border: #2a3441;
+  --danger: #ff8b8b;
+  --shadow: 0 12px 40px rgba(0,0,0,.35);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(124,199,255,.20), transparent 32rem),
+    radial-gradient(circle at top right, rgba(158,240,192,.12), transparent 30rem),
+    var(--bg);
+  color: var(--text);
+  font: 15px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+a { color: var(--accent); }
+header {
+  padding: 40px 24px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+h1 { font-size: clamp(2rem, 5vw, 4.2rem); line-height: 1; margin: 0 0 12px; letter-spacing: -0.04em; }
+h2 { font-size: clamp(1.35rem, 2vw, 2rem); margin: 0 0 8px; letter-spacing: -0.02em; }
+h3 { margin: 24px 0 10px; font-size: 1rem; color: var(--accent-2); }
+p { margin: 0 0 12px; }
+ul { margin: 8px 0 0 20px; padding: 0; }
+li { margin: 5px 0; }
+code {
+  background: #0b121a;
+  border: 1px solid var(--border);
+  padding: 2px 6px;
+  border-radius: 8px;
+  color: #d6f3ff;
+}
+.header-grid {
+  display: grid;
+  grid-template-columns: 1fr minmax(260px, 360px);
+  gap: 24px;
+  align-items: end;
+}
+.subtitle { color: var(--muted); max-width: 850px; font-size: 1.05rem; }
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(14px);
+  background: rgba(13,17,23,.84);
+  border-bottom: 1px solid var(--border);
+}
+.toolbar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+button, input[type="search"] {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font: inherit;
+}
+button { cursor: pointer; }
+button:hover { border-color: var(--accent); }
+input[type="search"] { min-width: min(100%, 340px); flex: 1; }
+.progress-shell {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+.progress-label { display: flex; justify-content: space-between; color: var(--muted); margin-bottom: 8px; }
+.progress-bar { height: 12px; background: #0a1118; border-radius: 999px; overflow: hidden; border: 1px solid var(--border); }
+.progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); transition: width .2s ease; }
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+.nav-cards {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+  margin: 16px 0 24px;
+}
+.nav-cards a {
+  display: block;
+  text-decoration: none;
+  background: rgba(21,27,35,.86);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 12px;
+  color: var(--text);
+}
+.nav-cards a:hover { border-color: var(--accent); transform: translateY(-1px); }
+.card {
+  background: rgba(21,27,35,.92);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 24px;
+  margin: 18px 0;
+  box-shadow: var(--shadow);
+}
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: start;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 18px;
+}
+.eyebrow {
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: .75rem;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+.goal { color: var(--muted); max-width: 780px; }
+.section-progress {
+  min-width: 64px;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 10px;
+  color: var(--accent-2);
+  background: var(--panel-2);
+  font-weight: 800;
+}
+.grid-2 {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+  gap: 24px;
+}
+.check {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  border: 1px solid var(--border);
+  background: var(--panel-2);
+  border-radius: 14px;
+  padding: 10px 12px;
+  margin: 8px 0;
+}
+.check input { transform: translateY(3px); accent-color: var(--accent-2); }
+.check span { flex: 1; }
+.check:has(input:checked) {
+  border-color: rgba(158,240,192,.55);
+  background: rgba(158,240,192,.08);
+}
+.check:has(input:checked) span { color: var(--muted); text-decoration: line-through; }
+.compact {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.compact td, .compact th {
+  border-bottom: 1px solid var(--border);
+  padding: 10px;
+  vertical-align: top;
+}
+.compact tr:last-child td { border-bottom: none; }
+.compact td:first-child {
+  color: var(--accent);
+  font-weight: 700;
+  width: 36%;
+}
+.table-wrap { overflow-x: auto; }
+.timeline {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: collapse;
+}
+.timeline th, .timeline td {
+  border-bottom: 1px solid var(--border);
+  padding: 10px;
+  text-align: left;
+  vertical-align: top;
+}
+.timeline th { color: var(--accent-2); background: var(--panel-2); position: sticky; top: 56px; }
+.badge {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 2px 8px;
+  border: 1px solid var(--border);
+  font-size: .78rem;
+  font-weight: 700;
+}
+.badge.high { color: var(--accent-2); }
+.badge.medium { color: var(--warn); }
+.callout {
+  border-left: 4px solid var(--warn);
+  background: rgba(255,209,102,.08);
+  padding: 14px 16px;
+  border-radius: 14px;
+  margin: 16px 0;
+}
+.hidden-by-filter { display: none !important; }
+footer {
+  color: var(--muted);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+@media (max-width: 900px) {
+  .header-grid, .grid-2 { grid-template-columns: 1fr; }
+  .nav-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .section-head { flex-direction: column; }
+}
+@media print {
+  body { background: white; color: black; }
+  .toolbar, button { display: none !important; }
+  .card, .progress-shell { box-shadow: none; break-inside: avoid; }
+  a { color: black; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-grid">
+    <div>
+      <p class="eyebrow">Path of Exile 2 · Ranger Deadeye</p>
+      <h1>Ice Shot / Snipe Campaign Path</h1>
+      <p class="subtitle">A single-file checklist built from the supplied video transcript, the full VTT run, and the Mobalytics written guide. Follow the level breakpoints in order; checkboxes are saved in this browser with localStorage.</p>
+    </div>
+    <div class="progress-shell">
+      <div class="progress-label"><strong>Total progress</strong><span id="progressText">0 / 0</span></div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+  </div>
+</header>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <input id="search" type="search" placeholder="Search checklist, gems, gear, timestamps…">
+    <button id="toggleIncomplete">Show incomplete only</button>
+    <button id="expandAll">Expand all</button>
+    <button id="resetAll">Reset checks</button>
+    <button onclick="window.print()">Print</button>
+  </div>
+</div>
+
+<main>
+  <nav class="nav-cards" aria-label="Level sections">
+    <a href="#lvl-1-14">1–14<br><small>Act 1 base</small></a>
+    <a href="#lvl-15-23">15–23<br><small>Recurve Bow</small></a>
+    <a href="#lvl-24-30">24–30<br><small>Snipe swap</small></a>
+    <a href="#lvl-31-41">31–41<br><small>Ice Shot</small></a>
+    <a href="#lvl-42-59">42–59<br><small>Artillery Bow</small></a>
+    <a href="#lvl-60-plus">60+<br><small>Interludes/maps</small></a>
+  </nav>
+
+  <section class="card">
+    <p class="eyebrow">Strict order summary</p>
+    <h2>Fast path through the build</h2>
+    <ol>
+      <li><strong>Act 1:</strong> Lightning Arrow + Lightning Rod. Prioritize flat attack damage, early support gems, Shortbow at lvl 5, Warden Bow at lvl 11.</li>
+      <li><strong>Act 2 start:</strong> craft a serious lvl 16 Recurve Bow. Save lvl 6/7 gems and Jeweller currency.</li>
+      <li><strong>Lvl 24:</strong> keep Lightning Arrow for clear, swap bossing to Snipe + Freezing Mark + Freezing Salvo.</li>
+      <li><strong>Lvl 31:</strong> swap Lightning Arrow to Ice Shot and Herald of Thunder to Herald of Ice; configure weapon set 2 for Freezing Mark.</li>
+      <li><strong>Lvl 33:</strong> craft ilvl 33 Dualstring/Cultist Bow. This should carry to lvl 46.</li>
+      <li><strong>Lvl 46:</strong> craft ilvl 46 Artillery Bow. This is the final campaign bow and can carry into maps.</li>
+      <li><strong>Interludes:</strong> treat them like acts: collect links, skill points, rewards, and finish cleanup before maps.</li>
+    </ol>
+    <div class="callout">
+      <strong>Important mismatch handled:</strong> the full VOD transcript mentions the Snipe swap around lvl 22, while the current written guide/checklist uses lvl 24. Use lvl 24 as the safer current-guide breakpoint; swap earlier only if you already have the gems and know the route.
+    </div>
+  </section>
+
+  
+<section class="card level-section" id="lvl-1-14">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">Breakpoint</p>
+      <h2>Level 1–14 · Act 1 foundation</h2>
+      <p class="goal">Use Lightning Arrow + Lightning Rod. Your priority is flat damage, early support gems, and a clean Act 1 boss order.</p>
+    </div>
+    <div class="section-progress" data-section="lvl-1-14">0%</div>
+  </div>
+  <div class="grid-2">
+    <div>
+      <h3>Do in this order</h3>
+      <div class="checks"><label class="check"><input type="checkbox" data-id="lvl-1-14-1"><span>Paste the vendor regex into vendors: !cros|crud and s: (am|ri|be|bow)|ovem|[egdl] to.at</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-1-14-2"><span>Follow early boss order: Devourer/Mud Burrow → Cold Witch/Clearfell → Hut Witch/Grelwood → Rust King/Red Vale.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-1-14-3"><span>Only skip Devourer if you are experienced or speedrunning; otherwise take the support gem.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-1-14-4"><span>Take Lightning Rod first, then Frost Bomb; Clearfell has a chest that should help with a lvl 1 skill gem.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-1-14-5"><span>Support gem order: Rapid Attacks I on Lightning Arrow → Elemental Armament I → Concentrated Area on Lightning Rod → second Elemental Armament I.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-1-14-6"><span>On bosses, place up to four Lightning Rods, Frost Bomb, then spam Lightning Arrow; face-tank only when safe.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-1-14-7"><span>At lvl 5 in Red Vale, get Shortbow before Rust King; Transmute/Augment for flat damage if possible.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-1-14-8"><span>At lvl 11, buy/drop Warden Bow; look for high DPS, flat elemental, or % physical damage.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-1-14-9"><span>Save artificer orbs, alchs, exalts, regals, and runes for the lvl 16 Recurve Bow unless you are overflowing.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-1-14-10"><span>Upgrade flasks when available; first key flask upgrade is lvl 10.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-1-14-11"><span>Salvage quality weapons for whetstones and socketed items for artificer shards/orbs.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-1-14-12"><span>Grab Ice-Tipped Arrows and Barrage when available around lvl 14.</span></label></div>
+    </div>
+    <div>
+      <h3>Gem / skill setup</h3>
+      <table class="compact"><tbody><tr><td>Lightning Arrow</td><td>Rapid Attacks I → Elemental Armament I</td></tr>
+<tr><td>Lightning Rod</td><td>Concentrated Area → Elemental Armament I</td></tr>
+<tr><td>Frost Bomb</td><td>Use for exposure on bosses</td></tr>
+<tr><td>Herald of Thunder</td><td>Concentrated Area when support gems allow</td></tr>
+<tr><td>Barrage</td><td>Use on cooldown once unlocked</td></tr>
+<tr><td>Ice-Tipped Arrows</td><td>Unlock around lvl 14; bonus passive damage</td></tr>
+<tr><td>Pounce</td><td>Optional mobility; needs talisman/off-hand form setup</td></tr></tbody></table>
+      <h3>Gear focus</h3>
+      <ul><li>Flat damage to attacks on rings, gloves, quiver, and bow is the highest early value.</li>
+<li>Red Vale lvl 5: farm Shortbow from Refined Arms, then Transmute/Augment bow + quiver.</li>
+<li>Level 11: swap into Warden Bow; keep it cheap/magic, do not spend premium currency.</li>
+<li>Movement-speed boots are very high value; do not replace MS boots unless new boots also have MS.</li>
+<li>Use life/resist/evasion gear elsewhere; helmet/belt/amulet can solve attributes.</li></ul>
+      <h3>Notes</h3>
+      <ul><li>Act 1 is the weakest part of most bow starts. Do not under-invest in flat attack damage.</li>
+<li>Pounce is optional. Use it for speed; skip it if you want fewer buttons.</li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="card level-section" id="lvl-15-23">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">Breakpoint</p>
+      <h2>Level 15–23 · Act 2 setup and Recurve Bow</h2>
+      <p class="goal">Keep Lightning Arrow + Lightning Rod, but put real resources into the lvl 16 Recurve Bow and start saving gems for the Snipe swap.</p>
+    </div>
+    <div class="section-progress" data-section="lvl-15-23">0%</div>
+  </div>
+  <div class="grid-2">
+    <div>
+      <h3>Do in this order</h3>
+      <div class="checks"><label class="check"><input type="checkbox" data-id="lvl-15-23-1"><span>At lvl 15–16, check town vendor repeatedly for a strong Recurve Bow base.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-15-23-2"><span>If a bow rolls high % physical or high flat damage, commit currency; otherwise wait/gamble rather than bricking all resources.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-15-23-3"><span>Fully invest in the lvl 16 bow once you find a good base; it should carry until lvl 33.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-15-23-4"><span>Upgrade flasks at lvl 16 and lvl 23.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-15-23-5"><span>Keep checking vendors every 1–2 levels for flat damage gloves/rings and movement-speed boots.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-15-23-6"><span>Level Frost Bomb to gem level 3; drop it after it stops applying to higher-level monsters.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-15-23-7"><span>Save lvl 6 and lvl 7 uncut skill gems/support gems for the upcoming Snipe setup.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-15-23-8"><span>Do not spend your first Lesser Jeweller’s Orb before Snipe.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-15-23-9"><span>Continue LA/LR boss rotation until the swap.</span></label></div>
+    </div>
+    <div>
+      <h3>Gem / skill setup</h3>
+      <table class="compact"><tbody><tr><td>Lightning Arrow</td><td>Rapid Attacks I + Elemental Armament I</td></tr>
+<tr><td>Lightning Rod</td><td>Concentrated Area + Elemental Armament I</td></tr>
+<tr><td>Frost Bomb</td><td>Level to gem level 3; useful until monster level 25+</td></tr>
+<tr><td>Herald of Thunder</td><td>Concentrated Area + Elemental Armament I if available</td></tr>
+<tr><td>Barrage</td><td>Use with rods for boss burst</td></tr>
+<tr><td>Ice-Tipped Arrows</td><td>Magnified Area I or Elemental Armament I when supported</td></tr>
+<tr><td>Pounce</td><td>Can be dropped mid Act 2/Act 3 if skill slots get tight</td></tr></tbody></table>
+      <h3>Gear focus</h3>
+      <ul><li>Level 16 Recurve Bow is the first major investment bow.</li>
+<li>Shop vendor every level for Recurve Bow bases, flat damage gloves, rings, and movement-speed boots.</li>
+<li>If vendor is bad, gamble bows after the gambling vendor unlocks.</li>
+<li>Best bow prefixes: high % physical damage first, then high flat physical/elemental damage.</li>
+<li>When the bow is good enough: quality it, socket it, rune it, Regal/Exalt/Alch as resources allow.</li></ul>
+      <h3>Notes</h3>
+      <ul><li>The creator repeatedly stresses that Act 2 feels weak if the bow is bad. A good lvl 16 bow can be the difference between smooth bosses and painful two-rotation fights.</li>
+<li>If lvl 16 RNG is terrible, you can delay a big craft briefly, but do not enter the Snipe phase with a truly weak bow.</li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="card level-section" id="lvl-24-30">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">Breakpoint</p>
+      <h2>Level 24–30 · Mini-swap into Snipe bossing</h2>
+      <p class="goal">Keep Lightning Arrow for clear, drop Lightning Rod for the Snipe + Freezing Mark + Freezing Salvo boss package.</p>
+    </div>
+    <div class="section-progress" data-section="lvl-24-30">0%</div>
+  </div>
+  <div class="grid-2">
+    <div>
+      <h3>Do in this order</h3>
+      <div class="checks"><label class="check"><input type="checkbox" data-id="lvl-24-30-1"><span>Perform the Snipe swap when you have the required gems; current guide plans around lvl 24.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-24-30-2"><span>Use a lvl 7 gem on Snipe if available; Snipe should be your highest-level boss damage gem.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-24-30-3"><span>Put Lesser Jeweller’s Orb on Snipe first so it becomes a four-link.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-24-30-4"><span>Search the relevant league mechanic zone even if it is annoying; the Snipe link is worth it.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-24-30-5"><span>If Window of Opportunity feels hard, temporarily use Elemental Focus or Hourglass instead.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-24-30-6"><span>Boss rotation before Ice Shot: pre-cast Ice-Tipped Arrows → Freezing Mark → Lightning Arrow 3–4 times → Freezing Salvo → Barrage → perfect-window Snipe.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-24-30-7"><span>If the boss is not frozen, repeat the freeze setup rather than forcing a bad Snipe.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-24-30-8"><span>For clear: Ice-Tipped Arrows when useful, Freezing Mark for the buff, then Lightning Arrow.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-24-30-9"><span>Do not over-button the setup; Escape Shot is only a fallback for bad freeze RNG or weak weapon.</span></label></div>
+    </div>
+    <div>
+      <h3>Gem / skill setup</h3>
+      <table class="compact"><tbody><tr><td>Lightning Arrow</td><td>Still main clear skill; Rapid Attacks I + Elemental Armament I</td></tr>
+<tr><td>Snipe</td><td>Concentrated Area + Window of Opportunity I + Elemental Armament II</td></tr>
+<tr><td>Freezing Mark</td><td>Prolonged Duration I</td></tr>
+<tr><td>Freezing Salvo</td><td>Freeze + Concentrated Area</td></tr>
+<tr><td>Herald of Thunder</td><td>Keep until lvl 31</td></tr>
+<tr><td>Barrage</td><td>Use immediately before Snipe once the boss is frozen</td></tr>
+<tr><td>Ice-Tipped Arrows</td><td>Use before boss; helps freeze setup</td></tr>
+<tr><td>Escape Shot</td><td>Optional only if freeze buildup is too low</td></tr></tbody></table>
+      <h3>Gear focus</h3>
+      <ul><li>Keep using the lvl 16 bow until lvl 33 unless you find an exceptional replacement.</li>
+<li>Look for the league mechanic around the Act 2/late-Act-2 zone that grants the guaranteed Lesser Jeweller’s Orb/four-link opportunity.</li>
+<li>Use the first Lesser Jeweller’s Orb on Snipe.</li>
+<li>Quality priority starts to matter: Freezing Mark quality helps freeze buildup.</li></ul>
+      <h3>Notes</h3>
+      <ul><li>The full-run VTT performs this swap earlier, around lvl 22. The updated guide text points to lvl 24, so this checklist follows lvl 24 but records the earlier VOD timing.</li>
+<li>Snipe timing: hold until the character flashes/lights up, then release. Practice the timing before relying on it for bosses.</li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="card level-section" id="lvl-31-41">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">Breakpoint</p>
+      <h2>Level 31–41 · Real Ice Shot and weapon swap</h2>
+      <p class="goal">Replace Lightning Arrow with Ice Shot, replace Herald of Thunder with Herald of Ice, and set up weapon-set points for Freezing Mark.</p>
+    </div>
+    <div class="section-progress" data-section="lvl-31-41">0%</div>
+  </div>
+  <div class="grid-2">
+    <div>
+      <h3>Do in this order</h3>
+      <div class="checks"><label class="check"><input type="checkbox" data-id="lvl-31-41-1"><span>At lvl 31, replace Lightning Arrow with Ice Shot.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-31-41-2"><span>At lvl 31, replace Herald of Thunder with Herald of Ice.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-31-41-3"><span>Right-click lock bow and quiver to all weapon sets so both sets use the same weapon/quiver.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-31-41-4"><span>Assign Ice Shot, Snipe, Freezing Salvo, Barrage, and Ice-Tipped Arrows to weapon set 1.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-31-41-5"><span>Assign only Freezing Mark to weapon set 2.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-31-41-6"><span>Leave spirit gems/auras active on both sets.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-31-41-7"><span>After killing the Jungle Ruins monkey, confirm you have roughly 10 weapon-set points.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-31-41-8"><span>Spend weapon set 2 points on the mark nodes near the bottom of the tree.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-31-41-9"><span>Spend weapon set 1 points on damage/herald nodes.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-31-41-10"><span>At lvl 33, craft/buy ilvl 33 Dualstring or Cultist Bow; prioritize high % physical or high flat damage.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-31-41-11"><span>Boss rotation now: Ice-Tipped Arrows before spawn → Freezing Mark → Ice Shot until frozen → Barrage → Snipe.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-31-41-12"><span>Use Freezing Salvo only if it meaningfully speeds up freezing or if your bow is behind.</span></label></div>
+    </div>
+    <div>
+      <h3>Gem / skill setup</h3>
+      <table class="compact"><tbody><tr><td>Ice Shot · Set 1</td><td>Rapid Attacks I + Elemental Armament II + Ice Bite I</td></tr>
+<tr><td>Snipe · Set 1</td><td>Concentrated Area + Window of Opportunity I + Elemental Armament II</td></tr>
+<tr><td>Freezing Mark · Set 2</td><td>Prolonged Duration I + Mark of Siphoning + Eternal Mark</td></tr>
+<tr><td>Herald of Ice · both sets</td><td>Magnified Area I + Elemental Armament II + Elemental Focus</td></tr>
+<tr><td>Barrage · Set 1</td><td>Cooldown Recovery I</td></tr>
+<tr><td>Ice-Tipped Arrows · Set 1</td><td>Magnified Area I + Elemental Armament II</td></tr>
+<tr><td>Freezing Salvo · Set 1</td><td>Freeze + Concentrated Area; optional once Ice Shot freezes fast enough</td></tr>
+<tr><td>Combat Frenzy · both sets</td><td>Add when available</td></tr></tbody></table>
+      <h3>Gear focus</h3>
+      <ul><li>Level 33 bow upgrade: ilvl 33 Dualstring Bow or Cultist Bow.</li>
+<li>Cultist Bow is fine despite chaos implicit/identity because the base physical damage is strong.</li>
+<li>Craft only on ilvl 33+ so the next useful damage affix tiers are available.</li>
+<li>Fully invest again: 20 quality, two artificer sockets, two runes, and 6 mods if the base is good.</li>
+<li>Save one Iron Rune for the lvl 46 Artillery Bow if possible.</li>
+<li>Start looking for better quivers; +levels and high flat damage are still priorities.</li></ul>
+      <h3>Notes</h3>
+      <ul><li>Weapon swapping is not optional value here: it makes Freezing Mark last longer and makes bosses easier to freeze.</li>
+<li>For general clear, Ice-Tipped Arrows + Freezing Mark + Ice Shot is usually enough.</li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="card level-section" id="lvl-42-59">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">Breakpoint</p>
+      <h2>Level 42–59 · Artillery Bow and late campaign power</h2>
+      <p class="goal">Upgrade into the final campaign bow, finish important links, and start adding defensive/utility gems.</p>
+    </div>
+    <div class="section-progress" data-section="lvl-42-59">0%</div>
+  </div>
+  <div class="grid-2">
+    <div>
+      <h3>Do in this order</h3>
+      <div class="checks"><label class="check"><input type="checkbox" data-id="lvl-42-59-1"><span>Do not over-invest in a pre-46 bow if you are close to Artillery Bow.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-42-59-2"><span>At lvl 46, buy/gamble/drop ilvl 46 Artillery Bow bases.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-42-59-3"><span>Craft the best Artillery Bow you can; prioritize % physical damage.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-42-59-4"><span>Use first Greater Jeweller’s Orb on Snipe for boss damage.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-42-59-5"><span>If a second Greater Jeweller’s Orb drops, use it on Ice Shot for Fork.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-42-59-6"><span>Add Charged Mark to Freezing Mark when you get the first lvl 5 support gem in the later setup.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-42-59-7"><span>Add Wind Dancer for smoother survival once available.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-42-59-8"><span>Add Tornado Shot for extra clear/boss damage by placing it before boss spawns.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-42-59-9"><span>Keep resists and attributes solved; strength requirements become noticeable.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-42-59-10"><span>Keep quality priority: Freezing Mark → Herald of Ice → Snipe.</span></label></div>
+    </div>
+    <div>
+      <h3>Gem / skill setup</h3>
+      <table class="compact"><tbody><tr><td>Ice Shot</td><td>Rapid Attacks I + Elemental Armament II + Ice Bite II; add Fork if you get the second Greater Jeweller’s Orb</td></tr>
+<tr><td>Snipe</td><td>Concentrated Area + Window of Opportunity I + Elemental Armament II + Elemental Focus</td></tr>
+<tr><td>Freezing Mark</td><td>Charged Mark + Prolonged Duration II + Eternal Mark</td></tr>
+<tr><td>Herald of Ice</td><td>Magnified Area I + Elemental Armament II + Elemental Focus</td></tr>
+<tr><td>Barrage</td><td>Cooldown Recovery I + Rapid Casting II</td></tr>
+<tr><td>Ice-Tipped Arrows</td><td>Short Fuse I + Elemental Armament II + Magnified Area I</td></tr>
+<tr><td>Combat Frenzy</td><td>Charge Profusion I</td></tr>
+<tr><td>Wind Dancer</td><td>Knockback</td></tr>
+<tr><td>Tornado Shot</td><td>Prolonged Duration II + Overabundance/Increased Limit II + Rapid Attacks II</td></tr></tbody></table>
+      <h3>Gear focus</h3>
+      <ul><li>Level 46 Artillery Bow is the last campaign bow upgrade and can carry into maps.</li>
+<li>Make sure the Artillery Bow is ilvl 46 before heavy crafting.</li>
+<li>Best stat is high % physical damage; if unavailable, use high flat rolls/high DPS.</li>
+<li>Upgrade flasks at lvl 40 and lvl 50.</li>
+<li>At lvl 41+, gamble or shop quivers if yours is weak; +2 projectile quiver is a high roll but not mandatory.</li></ul>
+      <h3>Notes</h3>
+      <ul><li>The VOD notes that a few bosses cannot be frozen or have mandatory phases. For those, just use normal damage rotations and do not wait forever for freeze.</li>
+<li>A mediocre bow usually means two Snipe rotations; a good bow usually means one.</li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="card level-section" id="lvl-60-plus">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">Breakpoint</p>
+      <h2>Level 60+ · Interludes, cleanup, and map handoff</h2>
+      <p class="goal">Finish remaining campaign/interlude rewards, clean up missing passives/trials, then move to the endgame Ice Shot guide.</p>
+    </div>
+    <div class="section-progress" data-section="lvl-60-plus">0%</div>
+  </div>
+  <div class="grid-2">
+    <div>
+      <h3>Do in this order</h3>
+      <div class="checks"><label class="check"><input type="checkbox" data-id="lvl-60-plus-1"><span>Finish any missing campaign skill points and weapon-set points.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-60-plus-2"><span>Complete both trials if you skipped one during speed leveling.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-60-plus-3"><span>Quest reward choices: Act 2 medallion → increased charm charges gained.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-60-plus-4"><span>Quest reward choices: Act 3 Venom reward → stun threshold.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-60-plus-5"><span>Quest reward choices: Act 4 tattoo → Dex / Lightning resist / Fire resist as needed.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-60-plus-6"><span>Quest reward choices: Act 4 Prison → life recovery from flask.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-60-plus-7"><span>Interlude reward: choose Resist, Movement Speed, or Global Defense; it can be changed later.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-60-plus-8"><span>Confirm weapon-set assignments did not break after gear/gem changes.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-60-plus-9"><span>Confirm Snipe and Ice Shot are your Jeweller priority skills.</span></label>
+<label class="check"><input type="checkbox" data-id="lvl-60-plus-10"><span>Switch to the endgame guide after campaign/maps unlock.</span></label></div>
+    </div>
+    <div>
+      <h3>Gem / skill setup</h3>
+      <table class="compact"><tbody><tr><td>Core loop</td><td>Ice Shot clear + Freezing Mark buff/freeze + Barrage → Snipe for bosses</td></tr>
+<tr><td>Ice Shot</td><td>Keep scaling links/quality as currency allows</td></tr>
+<tr><td>Snipe</td><td>Highest priority boss link and first Greater Jeweller target</td></tr>
+<tr><td>Freezing Mark</td><td>Keep on set 2 with mark nodes; quality remains very valuable</td></tr>
+<tr><td>Tornado Shot</td><td>Place on boss before spawn when using the late setup</td></tr></tbody></table>
+      <h3>Gear focus</h3>
+      <ul><li>Keep the lvl 46 Artillery Bow until a clearly better maps bow drops.</li>
+<li>Upgrade flasks at lvl 60.</li>
+<li>Patch weak resistances and attributes before maps.</li>
+<li>Quiver upgrade remains valuable: +projectiles, +levels, flat damage.</li>
+<li>Replace campaign rares with life/resists/evasion/attribute pieces where needed.</li></ul>
+      <h3>Notes</h3>
+      <ul><li>The VOD’s final campaign time was around 5:16, with the creator saying sub-5 is realistic with more Act 4/interlude practice.</li>
+<li>Treat interludes like acts for checklist purposes: they contain power rewards, links, and cleanup tasks.</li></ul>
+    </div>
+  </div>
+</section>
+
+  <section class="card" id="timestamps">
+    <p class="eyebrow">Full VTT timeline</p>
+    <h2>Gross campaign timeline</h2>
+    <p class="goal">Rounded to the nearest 5 minutes and simplified for route reference. Blank level means the transcript did not mention a useful character level close to that checkpoint.</p>
+    <div class="table-wrap">
+      <table class="timeline">
+        <thead><tr><th>Timestamp</th><th>Level</th><th>Checkpoint</th></tr></thead>
+        <tbody>
+<tr><td><a href="#" data-ts="00:00">00:00</a></td><td>1</td><td>Act 1 started</td></tr>
+<tr><td><a href="#" data-ts="00:00">00:00</a></td><td></td><td>Bloated Miller</td></tr>
+<tr><td><a href="#" data-ts="00:25">00:25</a></td><td></td><td>Hut Witch / early support-gem boss</td></tr>
+<tr><td><a href="#" data-ts="00:50">00:50</a></td><td>≈14</td><td>Count Geonor</td></tr>
+<tr><td><a href="#" data-ts="00:50">00:50</a></td><td>≈14</td><td>Act 1 finished</td></tr>
+<tr><td><a href="#" data-ts="00:55">00:55</a></td><td>≈16</td><td>Act 2 started</td></tr>
+<tr><td><a href="#" data-ts="01:35">01:35</a></td><td>≈22–24</td><td>Titan grotto / bugged-freeze boss</td></tr>
+<tr><td><a href="#" data-ts="01:55">01:55</a></td><td></td><td>Bugged-freeze boss</td></tr>
+<tr><td><a href="#" data-ts="02:00">02:00</a></td><td>≈31</td><td>Jamanra / Act 2 final boss</td></tr>
+<tr><td><a href="#" data-ts="02:05">02:05</a></td><td>≈31</td><td>Act 2 finished</td></tr>
+<tr><td><a href="#" data-ts="02:05">02:05</a></td><td>≈31</td><td>Act 3 started</td></tr>
+<tr><td><a href="#" data-ts="02:10">02:10</a></td><td>≈31</td><td>Jungle Ruins monkey</td></tr>
+<tr><td><a href="#" data-ts="03:05">03:05</a></td><td>≈46</td><td>Act 3 final boss</td></tr>
+<tr><td><a href="#" data-ts="03:10">03:10</a></td><td>≈46</td><td>Act 3 finished</td></tr>
+<tr><td><a href="#" data-ts="03:10">03:10</a></td><td>≈46</td><td>Act 4 started</td></tr>
+<tr><td><a href="#" data-ts="03:55">03:55</a></td><td>≈52</td><td>Monkey / challenge boss</td></tr>
+<tr><td><a href="#" data-ts="04:10">04:10</a></td><td></td><td>Mandatory-phase boss</td></tr>
+<tr><td><a href="#" data-ts="04:25">04:25</a></td><td></td><td>Act 4 final boss</td></tr>
+<tr><td><a href="#" data-ts="04:25">04:25</a></td><td></td><td>Act 4 finished</td></tr>
+<tr><td><a href="#" data-ts="04:25">04:25</a></td><td></td><td>Interlude 1 started</td></tr>
+<tr><td><a href="#" data-ts="04:55">04:55</a></td><td></td><td>Interlude 1 monkey boss</td></tr>
+<tr><td><a href="#" data-ts="05:25">05:25</a></td><td></td><td>Interludes finished / campaign finished</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card" id="sources">
+    <p class="eyebrow">Sources and assumptions</p>
+    <h2>Source notes</h2>
+    <ul><li>Mobalytics guide page retrieved from the supplied URL; page title: 0.5 Ice Shot Deadeye Leveling Guide, updated May 28, 2026.</li>
+<li>User-supplied short transcript used for explanations of boss order, bow crafting, gem swaps, and rotations.</li>
+<li>User-supplied full VTT used for timestamp extraction. Timeline timestamps are rounded to the nearest 5 minutes, and unclear auto-captioned boss names are kept descriptive rather than over-precise.</li></ul>
+    <p style="margin-top:12px">Written guide URL: <a href="https://mobalytics.gg/poe-2/builds/ice-shot-deadeye-leveling-guide?ws-ngf5-f7d82102-7e77-4a44-ad24-33b67e8ae7bf=activeVariantId%2C1">Mobalytics Ice Shot Deadeye Leveling Guide</a></p>
+  </section>
+</main>
+
+<footer>
+  <p>Generated on 2026-05-28. Progress is stored locally under <code>poe2-ice-shot-deadeye-v1</code>.</p>
+</footer>
+
+<script>
+const STORAGE_KEY = "poe2-ice-shot-deadeye-v1";
+const checks = [...document.querySelectorAll('input[type="checkbox"][data-id]')];
+const progressText = document.getElementById('progressText');
+const progressFill = document.getElementById('progressFill');
+const search = document.getElementById('search');
+const toggleIncomplete = document.getElementById('toggleIncomplete');
+let incompleteOnly = false;
+
+function loadState() {
+  let state = {};
+  try { state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch {}
+  checks.forEach(cb => cb.checked = Boolean(state[cb.dataset.id]));
+}
+function saveState() {
+  const state = {};
+  checks.forEach(cb => state[cb.dataset.id] = cb.checked);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+function updateProgress() {
+  const done = checks.filter(cb => cb.checked).length;
+  const total = checks.length;
+  const pct = total ? Math.round(done / total * 100) : 0;
+  progressText.textContent = `${done} / ${total} (${pct}%)`;
+  progressFill.style.width = pct + "%";
+
+  document.querySelectorAll('.level-section').forEach(section => {
+    const local = [...section.querySelectorAll('input[type="checkbox"][data-id]')];
+    const localDone = local.filter(cb => cb.checked).length;
+    const localPct = local.length ? Math.round(localDone / local.length * 100) : 0;
+    const pill = section.querySelector('.section-progress');
+    if (pill) pill.textContent = localPct + "%";
+  });
+}
+function applyFilters() {
+  const q = search.value.trim().toLowerCase();
+  document.querySelectorAll('.check').forEach(row => {
+    const text = row.innerText.toLowerCase();
+    const cb = row.querySelector('input');
+    const matchesSearch = !q || text.includes(q);
+    const matchesIncomplete = !incompleteOnly || !cb.checked;
+    row.classList.toggle('hidden-by-filter', !(matchesSearch && matchesIncomplete));
+  });
+
+  document.querySelectorAll('.card').forEach(card => {
+    if (!card.classList.contains('level-section')) return;
+    const visibleChecks = [...card.querySelectorAll('.check')].some(r => !r.classList.contains('hidden-by-filter'));
+    const cardText = card.innerText.toLowerCase();
+    const nonCheckboxMatch = !q || cardText.includes(q);
+    card.classList.toggle('hidden-by-filter', q && !visibleChecks && !nonCheckboxMatch);
+  });
+}
+
+checks.forEach(cb => cb.addEventListener('change', () => {
+  saveState();
+  updateProgress();
+  applyFilters();
+}));
+search.addEventListener('input', applyFilters);
+toggleIncomplete.addEventListener('click', () => {
+  incompleteOnly = !incompleteOnly;
+  toggleIncomplete.textContent = incompleteOnly ? "Show all" : "Show incomplete only";
+  applyFilters();
+});
+document.getElementById('resetAll').addEventListener('click', () => {
+  if (!confirm('Reset all checklist progress?')) return;
+  checks.forEach(cb => cb.checked = false);
+  saveState();
+  updateProgress();
+  applyFilters();
+});
+document.getElementById('expandAll').addEventListener('click', () => {
+  document.querySelectorAll('.hidden-by-filter').forEach(el => el.classList.remove('hidden-by-filter'));
+  search.value = "";
+  incompleteOnly = false;
+  toggleIncomplete.textContent = "Show incomplete only";
+});
+
+document.querySelectorAll('[data-ts]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    navigator.clipboard?.writeText(link.dataset.ts);
+    link.textContent = link.dataset.ts + " copied";
+    setTimeout(() => link.textContent = link.dataset.ts, 900);
+  });
+});
+
+loadState();
+updateProgress();
+applyFilters();
+</script>
+</body>
+</html>
